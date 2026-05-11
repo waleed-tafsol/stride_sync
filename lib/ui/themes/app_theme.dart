@@ -138,7 +138,6 @@ class AppTheme {
         contentPadding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 12.h),
         filled: true,
         fillColor: AppColors.white,
-
         errorStyle: TextStyle(fontSize: 11.sp, overflow: TextOverflow.visible),
         errorMaxLines: 2,
         suffixIconColor: AppColors.textBlack,

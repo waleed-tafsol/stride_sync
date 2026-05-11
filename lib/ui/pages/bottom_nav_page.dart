@@ -7,6 +7,8 @@ import 'package:stride_sync/ui/pages/profile_page.dart';
 import 'package:stride_sync/ui/view_models/bottom_nav_view_model.dart';
 import 'package:stride_sync/ui/widgets/custom_bottom_nav.dart';
 
+import 'add_event_screen.dart';
+
 class BottomNavPage extends StatelessWidget {
   static const String routeName = "/bottom_nav_page";
 
@@ -16,7 +18,7 @@ class BottomNavPage extends StatelessWidget {
   static const List<Widget> _screens = [
     HomePage(),
     HorsesPage(),
-    EventPage(),
+    AddEventScreen(),
     ProfilePage(),
   ];
 
