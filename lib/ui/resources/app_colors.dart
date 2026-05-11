@@ -5,9 +5,13 @@ abstract final class AppColors {
   static const primaryLight = Color(0xFFFCF0FC);
   static const textGrey = Color(0xFF5C5C5C);
   static const textBlack = Color(0xFF323232);
+  static const greyColor = Color(0xFFE4E2DD);
+  static const fillGreyColor = Color(0xFFE1E1E1);
+  static const greycolor2 = Color(0xFF676767);
   static const borderColor = Color(0xFFC3C8C1);
   static const secondary = Color(0xFF78583B);
-  static const lightbrown = Color(0xFFE1B691);
+  static const lightBrown1 = Color(0xFFE1B691);
+  static const lightBrown2 = Color(0xFFF5E9DE);
   static const textFeildBorder = Color(0xFF432C23);
   static const scaffoldBackground = Color(0xFFFBF9F8);
   static const white = Colors.white;
@@ -16,6 +20,9 @@ abstract final class AppColors {
   static const buttonBorder = Color(0xFFFFDCC0);
   static const dialogBorder = Color(0xFFAAAAAA);
   static const lightBrown = Color(0xFFFFF7F3);
+  static const greenColor = Color(0xFF07591B);
+  static const lightGreen = Color(0xFFF3FFED);
+  
 
   static const LinearGradient buttonGradient = LinearGradient(
     begin: Alignment.topLeft,

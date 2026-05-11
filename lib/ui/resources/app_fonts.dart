@@ -74,6 +74,11 @@ abstract final class AppFonts {
     fontWeight: FontWeight.w400,
     color: AppColors.textGrey,
   );
+   static final grey10w400 = _base.copyWith(
+    fontSize: 10.sp,
+    fontWeight: FontWeight.w400,
+    color: AppColors.textGrey,
+  );
   static final grey14w400 = _base.copyWith(
     fontSize: 14.sp,
     fontWeight: FontWeight.w400,
