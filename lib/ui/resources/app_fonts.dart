@@ -13,14 +13,39 @@ abstract final class AppFonts {
     fontWeight: FontWeight.w400,
     color: AppColors.textBlack,
   );
+    static final black13w400 = _base.copyWith(
+    fontSize: 13.sp,
+    fontWeight: FontWeight.w400,
+    color: AppColors.textBlack,
+  );
   static final black16w400 = _base.copyWith(
     fontSize: 16.sp,
     fontWeight: FontWeight.w400,
     color: AppColors.textBlack,
   );
+  static final black18w400 = _base.copyWith(
+    fontSize: 18.sp,
+    fontWeight: FontWeight.w400,
+    color: AppColors.textBlack,
+  );
+  static final black20w600 = _base.copyWith(
+    fontSize: 20.sp,
+    fontWeight: FontWeight.w600,
+    color: AppColors.textBlack,
+  );
+   static final black20w700 = _base.copyWith(
+    fontSize: 20.sp,
+    fontWeight: FontWeight.w700,
+    color: AppColors.textBlack,
+  );
   static final black32w700 = _base.copyWith(
     fontSize: 32.sp,
     fontWeight: FontWeight.w700,
+    color: AppColors.textBlack,
+  );
+  static final black42w500 = _base.copyWith(
+    fontSize: 42.sp,
+    fontWeight: FontWeight.w500,
     color: AppColors.textBlack,
   );
   static final white15w500 = _base.copyWith(
@@ -78,9 +103,19 @@ abstract final class AppFonts {
     fontWeight: FontWeight.w500,
     color: AppColors.secondary,
   );
+  static final darkBrown20w700 = _base.copyWith(
+    fontSize: 20.sp,
+    fontWeight: FontWeight.w700,
+    color: AppColors.textFeildBorder,
+  );
   static final brown32w700 = _base.copyWith(
     fontSize: 32.sp,
     fontWeight: FontWeight.w700,
+    color: AppColors.secondary,
+  );
+  static final brown30w400 = _base.copyWith(
+    fontSize: 30.sp,
+    fontWeight: FontWeight.w400,
     color: AppColors.secondary,
   );
 }

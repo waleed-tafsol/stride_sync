@@ -73,7 +73,10 @@ class _VerifyEmailDialogState extends State<VerifyEmailDialog> {
   Widget build(BuildContext context) {
     return Dialog(
       backgroundColor: AppColors.white,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.r)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8.r),
+        side: BorderSide(color: AppColors.dialogBorder),
+      ),
       elevation: 10,
 
       child: Column(
@@ -118,7 +121,7 @@ class _VerifyEmailDialogState extends State<VerifyEmailDialog> {
               padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12.r),
-                border: .all(color: AppColors.broderColor),
+                border: .all(color: AppColors.borderColor),
               ),
               child: Pinput(
                 mainAxisAlignment: MainAxisAlignment.center,

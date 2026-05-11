@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stride_sync/constant/assets.dart';
 import 'package:stride_sync/ui/pages/forgot_password_page.dart';
+import 'package:stride_sync/ui/pages/subscription_page.dart';
 import 'package:stride_sync/ui/resources/app_colors.dart';
 import 'package:stride_sync/ui/resources/app_fonts.dart';
 import 'package:stride_sync/ui/widgets/dialog%20box/verify_email_dialog.dart';
@@ -42,7 +43,7 @@ class AuthPage extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: AppColors.white,
                     borderRadius: BorderRadius.circular(12.r),
-                    border: .all(color: AppColors.broderColor),
+                    border: .all(color: AppColors.borderColor),
                   ),
                   child: ValueListenableBuilder<bool>(
                     valueListenable: isSignInPressed,
@@ -239,12 +240,18 @@ class AuthPage extends StatelessWidget {
         ),
         SizedBox(height: 20.h),
         GradientButton(
-          text: "Sign In",
+          text: "Sign Up",
           onPressed: () {
             showVerifyEmailDialog(
               context,
               email: 'saad@yopmail.com',
-              onVerify: () {},
+              onVerify: () {
+                Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  SubscriptionPage.routeName,
+                  ModalRoute.withName(AuthPage.routeName),
+                );
+              },
               onResend: () {},
             );
           },

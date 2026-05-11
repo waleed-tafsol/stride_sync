@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:stride_sync/ui/pages/auth_page.dart';
 import 'package:stride_sync/ui/resources/app_fonts.dart';
 import 'package:stride_sync/ui/widgets/dialog%20box/email_sent_successfully_dialog.dart';
 import 'package:stride_sync/ui/widgets/gradient_button.dart';
@@ -7,7 +8,7 @@ import 'package:stride_sync/ui/widgets/text_form_field_with_title_widget.dart';
 import 'package:tabler_icons_plus/tabler_icons_plus.dart';
 
 class ForgotPasswordPage extends StatelessWidget {
-  static const String routeName = "/forgot-password";
+  static const String routeName = "/forgot_password";
 
   const ForgotPasswordPage({super.key});
 
@@ -39,6 +40,11 @@ class ForgotPasswordPage extends StatelessWidget {
                 showEmailSentDialog(
                   context,
                   onGoToLogin: () {
+                    Navigator.pushNamedAndRemoveUntil(
+                      context,
+                      AuthPage.routeName,
+                      (route) => false,
+                    );
                   },
                 );
               },

@@ -24,15 +24,16 @@ class EmailSentDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog(
       backgroundColor: AppColors.white,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.r)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8.r),
+        side: BorderSide(color: AppColors.dialogBorder),
+      ),
       elevation: 10,
-      insetPadding: EdgeInsets.symmetric(horizontal: 32.w, vertical: 60.h),
+
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           SizedBox(height: 28.h),
-
-          // Check badge
           Container(
             width: 60.w,
             height: 60.w,
@@ -53,33 +54,31 @@ class EmailSentDialog extends StatelessWidget {
               size: 30,
             ),
           ),
-          SizedBox(height: 20.h),
+          SizedBox(height: 28.h),
 
-          // Title
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24.w),
+            padding: EdgeInsets.symmetric(horizontal: 10.w),
             child: Text(
               'Email Successfully\nSent!',
               textAlign: TextAlign.center,
               style: AppFonts.brown32w700,
             ),
           ),
-          SizedBox(height: 16.h),
+          SizedBox(height: 20.h),
 
-          // Subtitle
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24.w),
+            padding: EdgeInsets.symmetric(horizontal: 10.w),
             child: Text(
               "We've sent a password reset link to the email address you provided. Please check your inbox.",
               textAlign: TextAlign.center,
               style: AppFonts.grey14w400,
             ),
           ),
-          SizedBox(height: 24.h),
+          SizedBox(height: 20.h),
 
-          Divider(height: 1.h, color: AppColors.broderColor),
+          Divider(height: 2.h, color: AppColors.black),
+          SizedBox(height: 30.h),
 
-          // Go to Login button
           GestureDetector(
             onTap: () {
               Navigator.pop(context);
@@ -95,6 +94,7 @@ class EmailSentDialog extends StatelessWidget {
               ),
             ),
           ),
+          SizedBox(height: 30.h),
         ],
       ),
     );
