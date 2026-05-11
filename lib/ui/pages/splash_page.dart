@@ -31,7 +31,7 @@ class _SplashPageState extends State<SplashPage> {
       body: Center(
         child: Text(
           'STRIDE SYNC',
-          style: AppFonts.SplashTexT35w700.copyWith(
+          style: AppFonts.brown35w700.copyWith(
             fontStyle: FontStyle.italic,
           ),
         ),

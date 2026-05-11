@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stride_sync/constant/assets.dart';
+import 'package:stride_sync/ui/pages/bottom_nav_page.dart';
 import 'package:stride_sync/ui/pages/forgot_password_page.dart';
 import 'package:stride_sync/ui/pages/subscription_page.dart';
 import 'package:stride_sync/ui/resources/app_colors.dart';
@@ -157,7 +158,16 @@ class AuthPage extends StatelessWidget {
           ),
         ),
         SizedBox(height: 20.h),
-        GradientButton(text: "Sign In", onPressed: () {}),
+        GradientButton(
+          text: "Sign In",
+          onPressed: () {
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              BottomNavPage.routeName,
+              (route) => false,
+            );
+          },
+        ),
         SizedBox(height: 20.h),
         Row(
           mainAxisAlignment: .center,

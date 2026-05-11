@@ -53,14 +53,13 @@ class StridSyncApp extends StatelessWidget {
           child: Consumer<ThemeViewModel>(
             builder: (_, vm, _) {
               return MaterialApp(
-               
                 debugShowCheckedModeBanner: false,
                 navigatorKey: AppRoutes.navigatorKey,
-                title: 'Curly Connections',
+                title: 'Stride Sync',
                 themeMode: vm.themeMode,
                 theme: AppTheme.lightTheme,
                 darkTheme: AppTheme.lightTheme,
-               initialRoute: SplashPage.routeName,
+                initialRoute: SplashPage.routeName,
                 onGenerateRoute: AppRoutes.routes,
                 builder: (_, child) {
                   configLoading();

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:stride_sync/ui/pages/auth_page.dart';
+import 'package:stride_sync/ui/pages/bottom_nav_page.dart';
 import 'package:stride_sync/ui/pages/forgot_password_page.dart';
 import 'package:stride_sync/ui/pages/splash_page.dart';
 import 'package:stride_sync/ui/pages/subscription_page.dart';
@@ -26,6 +27,10 @@ abstract final class AppRoutes {
       SubscriptionPage.routeName => CupertinoPageRoute(
         settings: const RouteSettings(name: SubscriptionPage.routeName),
         builder: (_) => const SubscriptionPage(),
+      ),
+       BottomNavPage.routeName => CupertinoPageRoute(
+        settings: const RouteSettings(name: BottomNavPage.routeName),
+        builder: (_) => const BottomNavPage(),
       ),
 
       null => throw UnimplementedError(),

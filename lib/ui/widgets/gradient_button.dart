@@ -8,14 +8,14 @@ class GradientButton extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;
   final TextStyle? textStyle;
-  final String? svgAsset;
+  final IconData? icon;
 
   const GradientButton({
     super.key,
     required this.text,
     required this.onPressed,
     this.textStyle,
-    this.svgAsset,
+    this.icon,
   });
 
   @override
@@ -40,14 +40,10 @@ class GradientButton extends StatelessWidget {
             child: Row(
               mainAxisAlignment: .center,
               children: [
-                if (svgAsset != null)
-                  SvgPicture.asset(
-                    svgAsset ?? "",
-                    color: AppColors.white,
-                    height: 16.h,
-                    width: 16.w,
-                  ),
-                if (svgAsset != null) SizedBox(width: 10.w),
+                if (icon != null)
+                  Icon(icon, size: 15.sp, color: AppColors.white),
+              
+                if (icon != null) SizedBox(width: 10.w),
                 Text(text, style: textStyle ?? AppFonts.white16w500),
               ],
             ),

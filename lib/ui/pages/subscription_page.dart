@@ -5,6 +5,7 @@ import 'package:stride_sync/constant/assets.dart';
 import 'package:stride_sync/models/dummy%20model/plan_model.dart';
 import 'package:stride_sync/ui/resources/app_colors.dart';
 import 'package:stride_sync/ui/resources/app_fonts.dart';
+import 'package:stride_sync/ui/widgets/custom_app_bar.dart';
 import 'package:stride_sync/ui/widgets/gradient_button.dart';
 import 'package:tabler_icons_plus/tabler_icons_plus.dart';
 
@@ -23,33 +24,10 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: Row(
-          children: [
-            Icon(Icons.menu, size: 30.sp),
-            SizedBox(width: 16.w),
-            Text("Subscription", style: AppFonts.black20w600),
-          ],
-        ),
-        actions: [
-          Padding(
-            padding: EdgeInsets.only(right: 16.w),
-            child: Container(
-              padding: EdgeInsets.all(10.w),
-              decoration: BoxDecoration(
-                gradient: AppColors.buttonGradient,
-                borderRadius: BorderRadius.circular(12.r),
-                border: Border.all(color: AppColors.buttonBorder),
-              ),
-              child: Icon(
-                TablerIcons.bell,
-                size: 22.sp,
-                color: AppColors.white,
-              ),
-            ),
-          ),
-        ],
+      appBar: CustomAppBar(
+        title: "Subscription",
+        leadingWidget: Icon(Icons.menu, size: 30.sp),
+        actionIcon: TablerIcons.bell,
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(vertical: 30.0.h, horizontal: 20.w),
