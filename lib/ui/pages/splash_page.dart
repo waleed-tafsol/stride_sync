@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:stride_sync/ui/pages/login_page.dart';
+import 'package:stride_sync/ui/pages/auth_page.dart';
 import 'package:stride_sync/ui/resources/app_fonts.dart';
 
 class SplashPage extends StatefulWidget {
