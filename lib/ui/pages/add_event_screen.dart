@@ -10,6 +10,8 @@ import '../widgets/custom_app_bar.dart';
 import '../widgets/text_form_field_with_title_widget.dart';
 
 class AddEventScreen extends StatefulWidget {
+  static const String routeName = '/add-event-screen';
+
   const AddEventScreen({super.key});
 
   @override

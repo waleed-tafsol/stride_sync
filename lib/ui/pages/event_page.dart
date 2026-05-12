@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:intl/intl.dart';
+import 'package:tabler_icons_plus/tabler_icons_plus.dart';
 import '../resources/app_colors.dart';
 import '../resources/app_fonts.dart';
 import '../widgets/custom_app_bar.dart';
+import 'add_event_screen.dart';
 
 class EventPage extends StatefulWidget {
   const EventPage({super.key});
@@ -17,9 +19,8 @@ class _EventPageState extends State<EventPage> {
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
 
-  // Dummy data for events
   final Map<DateTime, List<Event>> _events = {
-    DateTime.utc(2024, 10, 8): [
+    DateTime.utc(2026, 12, 5): [
       Event(
         title: 'Daily Training Session',
         time: '09:00 AM - 10:30 AM',
@@ -64,18 +65,9 @@ class _EventPageState extends State<EventPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        leadingWidget: Container(
-          height: 32.h,
-          width: 32.h,
-          padding: EdgeInsets.all(6.w),
-          decoration: BoxDecoration(
-            color: AppColors.containerGrey,
-            borderRadius: BorderRadius.circular(12.sp),
-            border: Border.all(color: AppColors.containerBorder),
-          ),
-          child: Icon(Icons.arrow_back, size: 20.sp),
-        ),
-        title: 'Add New Event',
+        leadingWidget: Icon(Icons.menu, size: 30.sp),
+        title: 'Events',
+        actionIcon: TablerIcons.bell,
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -171,7 +163,9 @@ class _EventPageState extends State<EventPage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, AddEventScreen.routeName);
+        },
         backgroundColor: AppColors.textFeildBorder,
         shape: const CircleBorder(),
         child: const Icon(Icons.add, color: AppColors.white, size: 30),

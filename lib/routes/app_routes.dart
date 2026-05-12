@@ -7,6 +7,8 @@ import 'package:stride_sync/ui/pages/horse_detail_page.dart';
 import 'package:stride_sync/ui/pages/splash_page.dart';
 import 'package:stride_sync/ui/pages/subscription_page.dart';
 
+import '../ui/pages/add_event_screen.dart';
+
 abstract final class AppRoutes {
   static final navigatorKey = GlobalKey<NavigatorState>();
 
@@ -36,6 +38,10 @@ abstract final class AppRoutes {
        HorseDetailPage.routeName => CupertinoPageRoute(
         settings: const RouteSettings(name: HorseDetailPage.routeName),
         builder: (_) => const HorseDetailPage(),
+      ),
+      AddEventScreen.routeName => CupertinoPageRoute(
+        settings: const RouteSettings(name: AddEventScreen.routeName),
+        builder: (_) => const AddEventScreen(),
       ),
 
       null => throw UnimplementedError(),
