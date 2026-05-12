@@ -4,6 +4,7 @@ import 'package:stride_sync/constant/assets.dart';
 import 'package:stride_sync/ui/resources/app_colors.dart';
 import 'package:stride_sync/ui/resources/app_fonts.dart';
 import 'package:stride_sync/ui/widgets/appointment_container.dart';
+import 'package:stride_sync/ui/widgets/custom_app_bar.dart';
 import 'package:stride_sync/ui/widgets/gradient_button.dart';
 import 'package:stride_sync/utils/enums.dart';
 import 'package:tabler_icons_plus/tabler_icons_plus.dart';
@@ -14,7 +15,8 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar:  
+      AppBar(
         automaticallyImplyLeading: false,
         toolbarHeight: 80.h,
 
