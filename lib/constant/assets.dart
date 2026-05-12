@@ -7,6 +7,8 @@ abstract final class SvgAssets {
 class DummyAssets {
   static const String _assets = 'assets/dummy';
   static const String profile = '$_assets/profile.png';
+  static const String horse = '$_assets/horse.png';
+
 }
 
 class PngAssets {

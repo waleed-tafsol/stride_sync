@@ -50,7 +50,6 @@ class TextFormFieldWithTitleWidget extends StatelessWidget {
             controller: controller,
             decoration: InputDecoration(
               hintText: hintText ?? "",
-
               prefixIcon: prefixIcon != null
                   ? Icon(prefixIcon, color: AppColors.secondary, size: 24.sp)
                   : null,
