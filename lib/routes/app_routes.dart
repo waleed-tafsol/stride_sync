@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:stride_sync/ui/pages/auth_page.dart';
 import 'package:stride_sync/ui/pages/bottom_nav_page.dart';
 import 'package:stride_sync/ui/pages/forgot_password_page.dart';
+import 'package:stride_sync/ui/pages/horse_detail_page.dart';
 import 'package:stride_sync/ui/pages/splash_page.dart';
 import 'package:stride_sync/ui/pages/subscription_page.dart';
 
@@ -31,6 +32,10 @@ abstract final class AppRoutes {
        BottomNavPage.routeName => CupertinoPageRoute(
         settings: const RouteSettings(name: BottomNavPage.routeName),
         builder: (_) => const BottomNavPage(),
+      ),
+       HorseDetailPage.routeName => CupertinoPageRoute(
+        settings: const RouteSettings(name: HorseDetailPage.routeName),
+        builder: (_) => const HorseDetailPage(),
       ),
 
       null => throw UnimplementedError(),

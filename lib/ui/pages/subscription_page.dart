@@ -205,7 +205,7 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
                           padding: .symmetric(horizontal: 16.w, vertical: 4.h),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8.r),
-                            color: AppColors.lightbrown,
+                            color: AppColors.lightBrown1,
                           ),
                           child: Text(
                             "Recommended",
