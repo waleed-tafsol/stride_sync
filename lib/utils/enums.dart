@@ -54,6 +54,40 @@ enum AppointmentType {
   }
 }
 
+enum Status {
+  active,
+  inActive;
+
+  String get label {
+    switch (this) {
+      case Status.active:
+        return 'Active';
+      case Status.inActive:
+        return 'Inactive';
+    }
+  }
+
+  Color get textColor {
+    switch (this) {
+      case Status.active:
+        return AppColors.greenColor;
+
+      case Status.inActive:
+        return AppColors.secondary;
+    }
+  }
+
+  Color get backGroundColor {
+    switch (this) {
+      case Status.active:
+        return AppColors.lightGreen;
+
+      case Status.inActive:
+        return AppColors.lightBrown2;
+    }
+  }
+}
+
 enum Endpoint {
   login('/login');
 
