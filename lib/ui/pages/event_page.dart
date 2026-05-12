@@ -246,40 +246,40 @@ class _EventPageState extends State<EventPage> {
       ),
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+          padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 'Sync Calendar',
-                style: AppFonts.black20w700.copyWith(letterSpacing: -0.64),
+                style: AppFonts.black20w700.copyWith(letterSpacing: -0.64.sp),
               ),
-              const SizedBox(height: 15),
+              SizedBox(height: 15.h),
               Row(
                 children: [
                   Expanded(
                     child: _buildSyncButton(
                       'Google Calendar',
-                      'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Google_Calendar_icon_%282020%29.svg/1024px-Google_Calendar_icon_%282020%29.svg.png',
+                      DummyAssets.googleCalendar,
                     ),
                   ),
-                  const SizedBox(width: 20),
+                  SizedBox(width: 20.w),
                   Expanded(
                     child: _buildSyncButton(
                       'Apple Calendar',
-                      'https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Apple_Calendar_icon.svg/1024px-Apple_Calendar_icon.svg.png',
+                      DummyAssets.iosCalendar,
                     ),
                   ),
                 ],
               ),
-              const SizedBox(height: 30),
+              SizedBox(height: 30.h),
               Container(
                 decoration: BoxDecoration(
                   color: AppColors.white,
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: AppColors.borderColor, width: 1),
+                  borderRadius: BorderRadius.circular(12.r),
+                  border: Border.all(color: AppColors.borderColor, width: 1.w),
                 ),
-                padding: const EdgeInsets.all(12),
+                padding: EdgeInsets.all(12.r),
                 child: TableCalendar(
                   firstDay: DateTime.utc(2020, 1, 1),
                   lastDay: DateTime.utc(2030, 12, 31),
@@ -293,7 +293,7 @@ class _EventPageState extends State<EventPage> {
                   },
                   eventLoader: _getEventsForDay,
                   calendarStyle: CalendarStyle(
-                    todayDecoration: BoxDecoration(
+                    todayDecoration: const BoxDecoration(
                       color: AppColors.lightBrown2,
                       shape: BoxShape.circle,
                     ),
@@ -307,65 +307,97 @@ class _EventPageState extends State<EventPage> {
                       shape: BoxShape.circle,
                     ),
                     outsideDaysVisible: false,
-                    defaultTextStyle: const TextStyle(fontFamily: AppFonts.fontFamily),
-                    weekendTextStyle: const TextStyle(fontFamily: AppFonts.fontFamily),
+                    defaultTextStyle: const TextStyle(
+                      fontFamily: AppFonts.fontFamily,
+                    ),
+                    weekendTextStyle: const TextStyle(
+                      fontFamily: AppFonts.fontFamily,
+                    ),
                   ),
                   headerStyle: HeaderStyle(
                     formatButtonVisible: false,
                     titleCentered: false,
                     titleTextStyle: AppFonts.black20w700,
-                    leftChevronIcon: const Icon(Icons.chevron_left, color: AppColors.borderColor),
-                    rightChevronIcon: const Icon(Icons.chevron_right, color: AppColors.borderColor),
+                    leftChevronIcon: const Icon(
+                      Icons.chevron_left,
+                      color: AppColors.borderColor,
+                    ),
+                    rightChevronIcon: const Icon(
+                      Icons.chevron_right,
+                      color: AppColors.borderColor,
+                    ),
                   ),
                   daysOfWeekStyle: DaysOfWeekStyle(
-                    weekdayStyle: AppFonts.grey16w400.copyWith(fontSize: 12),
-                    weekendStyle: AppFonts.grey16w400.copyWith(fontSize: 12),
+                    weekdayStyle: AppFonts.grey16w400.copyWith(fontSize: 12.sp),
+                    weekendStyle: AppFonts.grey16w400.copyWith(fontSize: 12.sp),
                   ),
                 ),
               ),
-              const SizedBox(height: 30),
+              SizedBox(height: 30.h),
+
+
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.w),
+          decoration: BoxDecoration(
+            color: AppColors.white,
+            borderRadius: BorderRadius.circular(8.r)
+          ),
+          child: Column(
+            crossAxisAlignment: .start,
+            children: [
               Text(
                 _selectedDay != null
                     ? DateFormat('EEEE, MMM d').format(_selectedDay!)
                     : 'Select a date',
-                style: AppFonts.black20w700.copyWith(letterSpacing: -0.64),
+                style: AppFonts.black20w700.copyWith(letterSpacing: -0.64.sp),
               ),
-              const SizedBox(height: 20),
-              ..._getEventsForDay(_selectedDay ?? _focusedDay).map((event) => _buildEventItem(event)).toList(),
-              const SizedBox(height: 80), // Space for FAB
+              SizedBox(height: 20.h),
+              ..._getEventsForDay(
+                _selectedDay ?? _focusedDay,
+              ).map((event) => _buildEventItem(event)),
+            ],
+          ),
+        ),
+              SizedBox(height: 40.h),
             ],
           ),
         ),
       ),
       floatingActionButton: GestureDetector(
-          onTap: (){
-            Navigator.pushNamed(context, AddEventScreen.routeName);
-          },
-          child: SvgPicture.asset(SvgAssets.floatingBtn)),
+        onTap: () {
+          Navigator.pushNamed(context, AddEventScreen.routeName);
+        },
+        child: SvgPicture.asset(SvgAssets.floatingBtn),
+      ),
     );
   }
 
   Widget _buildSyncButton(String title, String imageUrl) {
     return Container(
-      height: 56,
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      height: 56.h,
+      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
       decoration: BoxDecoration(
         color: AppColors.fillColor,
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: AppColors.textFeildBorder, width: 1),
+        borderRadius: BorderRadius.circular(8.r),
+        border: Border.all(color: AppColors.textFeildBorder, width: 1.w),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.network(imageUrl, width: 24, height: 24, errorBuilder: (c, e, s) => const Icon(Icons.calendar_month, size: 24)),
-          const SizedBox(width: 10),
+          Image.asset(
+            imageUrl,
+            width: 24.w,
+            height: 24.h,
+            errorBuilder: (c, e, s) => Icon(Icons.calendar_month, size: 24.sp),
+          ),
+          SizedBox(width: 10.w),
           Flexible(
             child: Text(
               title,
               textAlign: TextAlign.center,
               style: AppFonts.black16w400.copyWith(
                 fontWeight: FontWeight.w500,
-                letterSpacing: -0.80,
+                letterSpacing: -0.80.sp,
               ),
             ),
           ),
@@ -376,43 +408,50 @@ class _EventPageState extends State<EventPage> {
 
   Widget _buildEventItem(Event event) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 16),
+      margin: EdgeInsets.only(bottom: 16.h),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Event Image/Time Block
           Container(
-            width: 78,
-            height: 100,
-            decoration: const BoxDecoration(
+            width: 78.w,
+            height: 100.h,
+            decoration: BoxDecoration(
               color: AppColors.black,
               borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(10),
-                bottomLeft: Radius.circular(10),
+                topLeft: Radius.circular(10.r),
+                bottomLeft: Radius.circular(10.r),
               ),
             ),
             child: ClipRRect(
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(10),
-                bottomLeft: Radius.circular(10),
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(10.r),
+                bottomLeft: Radius.circular(10.r),
               ),
               child: Image.asset(
-               DummyAssets.horse,
+              event.horseImg,
                 fit: BoxFit.cover,
-                errorBuilder: (c, e, s) => const Center(child: Icon(Icons.event, color: AppColors.white)),
+                height: 100.h,
+                errorBuilder: (c, e, s) => Center(
+                  child: Icon(Icons.event, color: AppColors.white, size: 24.sp),
+                ),
               ),
             ),
           ),
           // Event Details
           Expanded(
             child: Container(
-              padding: const EdgeInsets.all(12),
+              padding: EdgeInsets.all(12.r),
+              height: 100.h,
               decoration: BoxDecoration(
                 color: AppColors.fillColor,
-                border: Border.all(color: AppColors.borderColor.withOpacity(0.5)),
-                borderRadius: const BorderRadius.only(
-                  topRight: Radius.circular(12),
-                  bottomRight: Radius.circular(12),
+                border: Border.all(
+                  color: AppColors.borderColor.withValues(alpha: 0.5),
+                  width: 1.w,
+                ),
+                borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(12.r),
+                  bottomRight: Radius.circular(12.r),
                 ),
               ),
               child: Column(
@@ -424,20 +463,25 @@ class _EventPageState extends State<EventPage> {
                       Expanded(
                         child: Text(
                           event.title,
-                          style: AppFonts.black14w400.copyWith(fontWeight: FontWeight.w600),
+                          style: AppFonts.black14w400.copyWith(
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                       ),
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 8.w,
+                          vertical: 2.h,
+                        ),
                         decoration: BoxDecoration(
                           color: event.typeColor,
-                          borderRadius: BorderRadius.circular(50),
+                          borderRadius: BorderRadius.circular(50.r),
                         ),
                         child: Text(
                           event.type,
                           style: TextStyle(
                             color: event.textColor,
-                            fontSize: 10,
+                            fontSize: 10.sp,
                             fontFamily: AppFonts.fontFamily,
                             fontWeight: FontWeight.w400,
                           ),
@@ -445,35 +489,37 @@ class _EventPageState extends State<EventPage> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8.h),
                   Row(
                     children: [
-                      const Icon(Icons.access_time, size: 12, color: AppColors.textGrey),
-                      const SizedBox(width: 4),
-                      Text(
-                        event.time,
-                        style: AppFonts.grey10w400,
+                      Icon(
+                        Icons.access_time,
+                        size: 12.sp,
+                        color: AppColors.textGrey,
                       ),
-                      const SizedBox(width: 12),
-                      const Icon(Icons.location_on_outlined, size: 12, color: AppColors.textGrey),
-                      const SizedBox(width: 4),
-                      Text(
-                        event.location,
-                        style: AppFonts.grey10w400,
+                      SizedBox(width: 4.w),
+                      Text(event.time, style: AppFonts.grey10w400),
+                      SizedBox(width: 12.w),
+                      Icon(
+                        Icons.location_on_outlined,
+                        size: 12.sp,
+                        color: AppColors.textGrey,
                       ),
+                      SizedBox(width: 4.w),
+                      Text(event.location, style: AppFonts.grey10w400),
                     ],
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8.h),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 8.w,
+                      vertical: 2.h,
+                    ),
                     decoration: BoxDecoration(
                       color: AppColors.brown,
-                      borderRadius: BorderRadius.circular(5),
+                      borderRadius: BorderRadius.circular(5.r),
                     ),
-                    child: Text(
-                      event.horseName,
-                      style: AppFonts.brown10w400,
-                    ),
+                    child: Text(event.horseName, style: AppFonts.brown10w400),
                   ),
                 ],
               ),
