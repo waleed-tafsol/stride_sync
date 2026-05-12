@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:stride_sync/constant/assets.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:intl/intl.dart';
 import 'package:tabler_icons_plus/tabler_icons_plus.dart';
@@ -20,15 +22,16 @@ class _EventPageState extends State<EventPage> {
   DateTime? _selectedDay;
 
   final Map<DateTime, List<Event>> _events = {
-    DateTime.utc(2026, 12, 5): [
+    DateTime.utc(2026, 05, 12): [
       Event(
         title: 'Daily Training Session',
         time: '09:00 AM - 10:30 AM',
         location: 'Arena A',
         horseName: 'Starlight',
         type: 'Training',
-        typeColor: AppColors.secondary,
+        typeColor: AppColors.lightBrown2,
         textColor: AppColors.secondary,
+        horseImg: DummyAssets.horse,
       ),
       Event(
         title: 'Veterinary Checkup',
@@ -36,8 +39,9 @@ class _EventPageState extends State<EventPage> {
         location: 'Main Stable',
         horseName: 'Midnight',
         type: 'Health',
-        typeColor: AppColors.secondary,
+        typeColor: AppColors.lightBrown2,
         textColor: AppColors.secondary,
+        horseImg: DummyAssets.horse1,
       ),
       Event(
         title: 'Farrier Appointment',
@@ -45,8 +49,179 @@ class _EventPageState extends State<EventPage> {
         location: 'Workshop',
         horseName: 'Golden Mane',
         type: 'Maintenance',
-        typeColor: AppColors.secondary,
+        typeColor: AppColors.lightBrown2,
         textColor: AppColors.secondary,
+        horseImg: DummyAssets.horse2,
+      ),
+    ],
+    DateTime.utc(2026, 05, 14): [
+      Event(
+        title: 'Daily Training Session',
+        time: '09:00 AM - 10:30 AM',
+        location: 'Arena A',
+        horseName: 'Starlight',
+        type: 'Training',
+        typeColor: AppColors.lightBrown2,
+        textColor: AppColors.secondary,
+        horseImg: DummyAssets.horse,
+      ),
+      Event(
+        title: 'Veterinary Checkup',
+        time: '02:00 PM - 03:00 PM',
+        location: 'Main Stable',
+        horseName: 'Midnight',
+        type: 'Health',
+        typeColor: AppColors.lightBrown2,
+        textColor: AppColors.secondary,
+        horseImg: DummyAssets.horse1,
+      ),
+      Event(
+        title: 'Farrier Appointment',
+        time: '04:30 PM',
+        location: 'Workshop',
+        horseName: 'Golden Mane',
+        type: 'Maintenance',
+        typeColor: AppColors.lightBrown2,
+        textColor: AppColors.secondary,
+        horseImg: DummyAssets.horse2,
+      ),
+    ],
+    DateTime.utc(2026, 05, 16): [
+      Event(
+        title: 'Daily Training Session',
+        time: '09:00 AM - 10:30 AM',
+        location: 'Arena A',
+        horseName: 'Starlight',
+        type: 'Training',
+        typeColor: AppColors.lightBrown2,
+        textColor: AppColors.secondary,
+        horseImg: DummyAssets.horse,
+      ),
+      Event(
+        title: 'Farrier Appointment',
+        time: '04:30 PM',
+        location: 'Workshop',
+        horseName: 'Golden Mane',
+        type: 'Maintenance',
+        typeColor: AppColors.lightBrown2,
+        textColor: AppColors.secondary,
+        horseImg: DummyAssets.horse2,
+      ),
+      Event(
+        title: 'Farrier Appointment',
+        time: '04:30 PM',
+        location: 'Workshop',
+        horseName: 'Golden Mane',
+        type: 'Maintenance',
+        typeColor: AppColors.lightBrown2,
+        textColor: AppColors.secondary,
+        horseImg: DummyAssets.horse2,
+      ),
+      Event(
+        title: 'Farrier Appointment',
+        time: '04:30 PM',
+        location: 'Workshop',
+        horseName: 'Golden Mane',
+        type: 'Maintenance',
+        typeColor: AppColors.lightBrown2,
+        textColor: AppColors.secondary,
+        horseImg: DummyAssets.horse2,
+      ),
+    ],
+    DateTime.utc(2026, 05, 17): [
+      Event(
+        title: 'Daily Training Session',
+        time: '09:00 AM - 10:30 AM',
+        location: 'Arena A',
+        horseName: 'Starlight',
+        type: 'Training',
+        typeColor: AppColors.lightBrown2,
+        textColor: AppColors.secondary,
+        horseImg: DummyAssets.horse,
+      ),
+      Event(
+        title: 'Veterinary Checkup',
+        time: '02:00 PM - 03:00 PM',
+        location: 'Main Stable',
+        horseName: 'Midnight',
+        type: 'Health',
+        typeColor: AppColors.lightBrown2,
+        textColor: AppColors.secondary,
+        horseImg: DummyAssets.horse1,
+      ),
+      Event(
+        title: 'Farrier Appointment',
+        time: '04:30 PM',
+        location: 'Workshop',
+        horseName: 'Golden Mane',
+        type: 'Maintenance',
+        typeColor: AppColors.lightBrown2,
+        textColor: AppColors.secondary,
+        horseImg: DummyAssets.horse2,
+      ),
+    ],
+    DateTime.utc(2026, 05, 19): [
+      Event(
+        title: 'Daily Training Session',
+        time: '09:00 AM - 10:30 AM',
+        location: 'Arena A',
+        horseName: 'Starlight',
+        type: 'Training',
+        typeColor: AppColors.lightBrown2,
+        textColor: AppColors.secondary,
+        horseImg: DummyAssets.horse,
+      ),
+      Event(
+        title: 'Veterinary Checkup',
+        time: '02:00 PM - 03:00 PM',
+        location: 'Main Stable',
+        horseName: 'Midnight',
+        type: 'Health',
+        typeColor: AppColors.lightBrown2,
+        textColor: AppColors.secondary,
+        horseImg: DummyAssets.horse1,
+      ),
+      Event(
+        title: 'Farrier Appointment',
+        time: '04:30 PM',
+        location: 'Workshop',
+        horseName: 'Golden Mane',
+        type: 'Maintenance',
+        typeColor: AppColors.lightBrown2,
+        textColor: AppColors.secondary,
+        horseImg: DummyAssets.horse2,
+      ),
+    ],
+    DateTime.utc(2026, 05, 20): [
+      Event(
+        title: 'Daily Training Session',
+        time: '09:00 AM - 10:30 AM',
+        location: 'Arena A',
+        horseName: 'Starlight',
+        type: 'Training',
+        typeColor: AppColors.lightBrown2,
+        textColor: AppColors.secondary,
+        horseImg: DummyAssets.horse,
+      ),
+      Event(
+        title: 'Veterinary Checkup',
+        time: '02:00 PM - 03:00 PM',
+        location: 'Main Stable',
+        horseName: 'Midnight',
+        type: 'Health',
+        typeColor: AppColors.lightBrown2,
+        textColor: AppColors.secondary,
+        horseImg: DummyAssets.horse1,
+      ),
+      Event(
+        title: 'Farrier Appointment',
+        time: '04:30 PM',
+        location: 'Workshop',
+        horseName: 'Golden Mane',
+        type: 'Maintenance',
+        typeColor: AppColors.lightBrown2,
+        textColor: AppColors.secondary,
+        horseImg: DummyAssets.horse2,
       ),
     ],
   };
@@ -118,8 +293,8 @@ class _EventPageState extends State<EventPage> {
                   },
                   eventLoader: _getEventsForDay,
                   calendarStyle: CalendarStyle(
-                    todayDecoration: const BoxDecoration(
-                      color: Color(0xFFFFF2E9),
+                    todayDecoration: BoxDecoration(
+                      color: AppColors.lightBrown2,
                       shape: BoxShape.circle,
                     ),
                     todayTextStyle: AppFonts.grey16w400,
@@ -162,14 +337,11 @@ class _EventPageState extends State<EventPage> {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pushNamed(context, AddEventScreen.routeName);
-        },
-        backgroundColor: AppColors.textFeildBorder,
-        shape: const CircleBorder(),
-        child: const Icon(Icons.add, color: AppColors.white, size: 30),
-      ),
+      floatingActionButton: GestureDetector(
+          onTap: (){
+            Navigator.pushNamed(context, AddEventScreen.routeName);
+          },
+          child: SvgPicture.asset(SvgAssets.floatingBtn)),
     );
   }
 
@@ -224,8 +396,8 @@ class _EventPageState extends State<EventPage> {
                 topLeft: Radius.circular(10),
                 bottomLeft: Radius.circular(10),
               ),
-              child: Image.network(
-                'https://placehold.co/78x100',
+              child: Image.asset(
+               DummyAssets.horse,
                 fit: BoxFit.cover,
                 errorBuilder: (c, e, s) => const Center(child: Icon(Icons.event, color: AppColors.white)),
               ),
@@ -295,12 +467,12 @@ class _EventPageState extends State<EventPage> {
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                     decoration: BoxDecoration(
-                      color: AppColors.lightBrown,
+                      color: AppColors.brown,
                       borderRadius: BorderRadius.circular(5),
                     ),
                     child: Text(
                       event.horseName,
-                      style: AppFonts.brown14w400.copyWith(fontSize: 10),
+                      style: AppFonts.brown10w400,
                     ),
                   ),
                 ],
@@ -318,6 +490,7 @@ class Event {
   final String time;
   final String location;
   final String horseName;
+  final String horseImg;
   final String type;
   final Color typeColor;
   final Color textColor;
@@ -328,6 +501,7 @@ class Event {
     required this.location,
     required this.horseName,
     required this.type,
+    required this.horseImg,
     required this.typeColor,
     required this.textColor,
   });
