@@ -19,25 +19,7 @@ class HorseDetailPage extends StatelessWidget {
         automaticallyImplyLeading: false,
         title: Row(
           children: [
-            GestureDetector(
-              onTap: () {
-                Navigator.pop(context);
-              },
-              child: Container(
-                padding: EdgeInsetsGeometry.all(6.w),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12.r),
-                  border: .all(color: AppColors.containerBorder),
-                  color: AppColors.containerBorder.withValues(alpha: 0.2),
-                ),
-
-                child: Icon(
-                  TablerIcons.arrowLeft,
-                  size: 22.sp,
-                  color: AppColors.black,
-                ),
-              ),
-            ),
+           BackButton(),
             SizedBox(width: 16.w),
 
             Text("Bella Details", style: AppFonts.black20w600),

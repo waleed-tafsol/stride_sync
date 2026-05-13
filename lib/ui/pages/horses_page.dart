@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:stride_sync/ui/pages/add_new_horse_page.dart';
 import 'package:stride_sync/ui/resources/app_colors.dart';
 import 'package:stride_sync/ui/resources/app_fonts.dart';
 import 'package:stride_sync/ui/widgets/custom_app_bar.dart';
@@ -164,7 +165,9 @@ class _HorsesPageState extends State<HorsesPage> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, AddNewHorsePage.routeName);
+        },
         child: Container(
           height: 50.h,
           width: 50.w,

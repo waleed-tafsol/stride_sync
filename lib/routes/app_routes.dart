@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
+import 'package:stride_sync/ui/pages/add_new_horse_page.dart';
 import 'package:stride_sync/ui/pages/auth_page.dart';
 import 'package:stride_sync/ui/pages/bottom_nav_page.dart';
 import 'package:stride_sync/ui/pages/forgot_password_page.dart';
@@ -36,6 +37,10 @@ abstract final class AppRoutes {
        HorseDetailPage.routeName => CupertinoPageRoute(
         settings: const RouteSettings(name: HorseDetailPage.routeName),
         builder: (_) => const HorseDetailPage(),
+      ),
+         AddNewHorsePage.routeName => CupertinoPageRoute(
+        settings: const RouteSettings(name: AddNewHorsePage.routeName),
+        builder: (_) => const AddNewHorsePage(),
       ),
 
       null => throw UnimplementedError(),
