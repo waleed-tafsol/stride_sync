@@ -318,11 +318,11 @@ class _EventPageState extends State<EventPage> {
                     formatButtonVisible: false,
                     titleCentered: false,
                     titleTextStyle: AppFonts.black20w700,
-                    leftChevronIcon: const Icon(
+                    leftChevronIcon: Icon(
                       Icons.chevron_left,
                       color: AppColors.borderColor,
                     ),
-                    rightChevronIcon: const Icon(
+                    rightChevronIcon: Icon(
                       Icons.chevron_right,
                       color: AppColors.borderColor,
                     ),
@@ -335,29 +335,30 @@ class _EventPageState extends State<EventPage> {
               ),
               SizedBox(height: 30.h),
 
-
-        Container(
-          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.w),
-          decoration: BoxDecoration(
-            color: AppColors.white,
-            borderRadius: BorderRadius.circular(8.r)
-          ),
-          child: Column(
-            crossAxisAlignment: .start,
-            children: [
-              Text(
-                _selectedDay != null
-                    ? DateFormat('EEEE, MMM d').format(_selectedDay!)
-                    : 'Select a date',
-                style: AppFonts.black20w700.copyWith(letterSpacing: -0.64.sp),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.w),
+                decoration: BoxDecoration(
+                  color: AppColors.white,
+                  borderRadius: BorderRadius.circular(8.r),
+                ),
+                child: Column(
+                  crossAxisAlignment: .start,
+                  children: [
+                    Text(
+                      _selectedDay != null
+                          ? DateFormat('EEEE, MMM d').format(_selectedDay!)
+                          : 'Select a date',
+                      style: AppFonts.black20w700.copyWith(
+                        letterSpacing: -0.64.sp,
+                      ),
+                    ),
+                    SizedBox(height: 20.h),
+                    ..._getEventsForDay(
+                      _selectedDay ?? _focusedDay,
+                    ).map((event) => _buildEventItem(event)),
+                  ],
+                ),
               ),
-              SizedBox(height: 20.h),
-              ..._getEventsForDay(
-                _selectedDay ?? _focusedDay,
-              ).map((event) => _buildEventItem(event)),
-            ],
-          ),
-        ),
               SizedBox(height: 40.h),
             ],
           ),
@@ -429,7 +430,7 @@ class _EventPageState extends State<EventPage> {
                 bottomLeft: Radius.circular(10.r),
               ),
               child: Image.asset(
-              event.horseImg,
+                event.horseImg,
                 fit: BoxFit.cover,
                 height: 100.h,
                 errorBuilder: (c, e, s) => Center(

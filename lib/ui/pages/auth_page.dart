@@ -61,7 +61,7 @@ class _AuthPageState extends State<AuthPage> {
                 ),
                 SizedBox(height: 30.h),
                 Container(
-                  padding: EdgeInsets.all(10.w),
+                  padding: EdgeInsets.all(6.w),
                   decoration: BoxDecoration(
                     color: AppColors.white,
                     borderRadius: BorderRadius.circular(12.r),
@@ -79,17 +79,17 @@ class _AuthPageState extends State<AuthPage> {
                               },
                               child: Container(
                                 alignment: .center,
-                                padding: EdgeInsets.symmetric(vertical: 5.h),
+                                padding: EdgeInsets.symmetric(vertical: 9.h),
                                 decoration: BoxDecoration(
                                   color: isSignPressed
                                       ? AppColors.black
                                       : AppColors.white,
                                   borderRadius: BorderRadius.circular(8.r),
-                                  border: .all(color: AppColors.black),
+                                  //  border: .all(color: AppColors.black),
                                 ),
                                 child: Text(
                                   "Sign In",
-                                  style: AppFonts.white18w400.copyWith(
+                                  style: AppFonts.white18w600.copyWith(
                                     color: isSignPressed
                                         ? AppColors.white
                                         : AppColors.textBlack,
@@ -106,18 +106,18 @@ class _AuthPageState extends State<AuthPage> {
                               },
                               child: Container(
                                 alignment: .center,
-                                padding: EdgeInsets.symmetric(vertical: 5.h),
+                                padding: EdgeInsets.symmetric(vertical: 9.h),
                                 decoration: BoxDecoration(
                                   color: isSignPressed
                                       ? AppColors.white
                                       : AppColors.black,
 
                                   borderRadius: BorderRadius.circular(8.r),
-                                  border: .all(color: AppColors.black),
+                                  //    border: .all(color: AppColors.black),
                                 ),
                                 child: Text(
                                   "Register",
-                                  style: AppFonts.white18w400.copyWith(
+                                  style: AppFonts.white18w600.copyWith(
                                     color: isSignPressed
                                         ? AppColors.textBlack
                                         : AppColors.white,
@@ -190,13 +190,13 @@ class _AuthPageState extends State<AuthPage> {
           },
         ),
         SizedBox(height: 20.h),
-        Row(
-          mainAxisAlignment: .center,
-          children: [
-            Text("Already Have an Account ? ", style: AppFonts.black14w400),
-            Text('Sign Up', style: AppFonts.brown14w400),
-          ],
-        ),
+        // Row(
+        //   mainAxisAlignment: .center,
+        //   children: [
+        //     Text("Already Have an Account ? ", style: AppFonts.black14w400),
+        //     Text('Sign Up', style: AppFonts.brown14w400),
+        //   ],
+        // ),
       ],
     );
   }
@@ -299,13 +299,13 @@ class _AuthPageState extends State<AuthPage> {
         ),
 
         SizedBox(height: 20.h),
-        Row(
-          mainAxisAlignment: .center,
-          children: [
-            Text("Already Have an Account ? ", style: AppFonts.black14w400),
-            Text('Sign In', style: AppFonts.brown14w400),
-          ],
-        ),
+        // Row(
+        //   mainAxisAlignment: .center,
+        //   children: [
+        //     Text("Already Have an Account ? ", style: AppFonts.black14w400),
+        //     Text('Sign In', style: AppFonts.brown14w400),
+        //   ],
+        // ),
       ],
     );
   }

@@ -9,7 +9,7 @@ abstract final class AppColors {
   static const greyColor = Color(0xFFE4E2DD);
   static const fillGreyColor = Color(0xFFE1E1E1);
   static const greycolor2 = Color(0xFF676767);
-  static const borderColor = Color(0xFFC3C8C1);
+  static final borderColor = Color(0xFFC3C8C1).withValues(alpha: 0.3);
   static const secondary = Color(0xFF78583B);
   static const brown = Color(0xFFEDBF95);
   static const lightBrown1 = Color(0xFFE1B691);
