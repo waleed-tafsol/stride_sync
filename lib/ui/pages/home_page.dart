@@ -15,8 +15,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:  
-      AppBar(
+      appBar: AppBar(
         automaticallyImplyLeading: false,
         toolbarHeight: 80.h,
 
@@ -235,7 +234,7 @@ final List<AppointmentModel> appointments = [
     day: '12',
     title: 'Vet Checkup - Bella',
     subtitle: 'Annual vaccination and physical',
-    type: AppointmentType.event,
+    type: AppointmentType.career,
   ),
   AppointmentModel(
     month: 'OCT',

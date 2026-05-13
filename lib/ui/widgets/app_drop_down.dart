@@ -4,120 +4,230 @@ import 'package:stride_sync/ui/resources/app_colors.dart';
 import 'package:stride_sync/ui/resources/app_fonts.dart';
 import 'package:tabler_icons_plus/tabler_icons_plus.dart';
 
-class AppDropDown<T> extends StatefulWidget {
-  final List<T> items;
-  final String label, hint;
-  final ValueSetter<T>? onChanged;
-  final T? initialItem;
-  final String Function(T) builder;
-  const AppDropDown({
+/// A fully reusable custom dropdown widget.
+///
+/// Usage example:
+/// ```dart
+/// CustomDropdown(
+///   label: 'Gender',
+///   hint: 'Select Gender',
+///   options: ['Stallion', 'Gelding', 'Mare'],
+///   onChanged: (value) => print(value),
+/// )
+/// ```
+class CustomDropdown extends StatefulWidget {
+  /// Label shown above the dropdown field.
+  final String label;
+
+  /// Placeholder text shown when nothing is selected.
+  final String hint;
+
+  /// List of options to display in the dropdown menu.
+  final List<String> options;
+
+  /// Called whenever the user selects an option.
+  final ValueChanged<String>? onChanged;
+
+  /// Pre-selected value (optional).
+  final String? initialValue;
+
+  const CustomDropdown({
     super.key,
-    required this.items,
     required this.label,
     required this.hint,
-    required this.builder,
+    required this.options,
     this.onChanged,
-    this.initialItem,
+    this.initialValue,
   });
 
   @override
-  State<AppDropDown<T>> createState() => _AppDropDownState<T>();
+  State<CustomDropdown> createState() => _CustomDropdownState();
 }
 
-class _AppDropDownState<S> extends State<AppDropDown<S>> {
-  bool _isExpanded = false;
-  S? _selectedItem;
+class _CustomDropdownState extends State<CustomDropdown> {
+  String? _selectedValue;
+
+  final LayerLink _layerLink = LayerLink();
+  final GlobalKey _triggerKey = GlobalKey();
+  OverlayEntry? _overlayEntry;
+  bool _isOpen = false;
 
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      setState(() {
-        _selectedItem = widget.initialItem;
-        setState(() {});
-      });
-    });
+    _selectedValue = widget.initialValue;
   }
 
-  void _toggleExpansion() {
-    setState(() {
-      _isExpanded = !_isExpanded;
-    });
+  @override
+  void dispose() {
+    _removeOverlay();
+    super.dispose();
+  }
+
+  void _removeOverlay() {
+    _overlayEntry?.remove();
+    _overlayEntry = null;
+    if (mounted) setState(() => _isOpen = false);
+  }
+
+  void _toggleDropdown() {
+    _isOpen ? _removeOverlay() : _openOverlay();
+  }
+
+  void _openOverlay() {
+    final renderBox =
+        _triggerKey.currentContext?.findRenderObject() as RenderBox?;
+    if (renderBox == null) return;
+    final double triggerWidth = renderBox.size.width;
+
+    _overlayEntry = OverlayEntry(
+      builder: (_) => Stack(
+        children: [
+          // Tap-outside dismisser — translucent so scrolling still works
+          Positioned.fill(
+            child: GestureDetector(
+              behavior: HitTestBehavior.translucent,
+              onTap: _removeOverlay,
+              child: const IgnorePointer(child: SizedBox.expand()),
+            ),
+          ),
+
+          // Panel anchored to the bottom-left of the trigger
+          CompositedTransformFollower(
+            link: _layerLink,
+            showWhenUnlinked: false,
+            targetAnchor: Alignment.bottomLeft,
+            followerAnchor: Alignment.topLeft,
+            offset: Offset(0, 8.h),
+            child: Material(
+              color: Colors.transparent,
+              child: SizedBox(
+                width: triggerWidth,
+                child: _DropdownPanel(
+                  options: widget.options,
+                  selectedOption: _selectedValue,
+                  onSelect: (value) {
+                    setState(() => _selectedValue = value);
+                    widget.onChanged?.call(value);
+                    _removeOverlay();
+                  },
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+
+    Overlay.of(context).insert(_overlayEntry!);
+    setState(() => _isOpen = true);
   }
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      spacing: 20.h,
-      crossAxisAlignment: .start,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(widget.label, style: AppFonts.black14w400),
-        Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10.r),
-            border: Border.all(color: AppColors.borderColor),
-          ),
-          clipBehavior: Clip.antiAlias,
-          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 13.5.h),
-          child: Column(
-            children: [
-              Row(
+        // Label
+        Text(widget.label, style: AppFonts.grey18w400),
+        SizedBox(height: 20.h),
+
+        // Trigger
+        CompositedTransformTarget(
+          link: _layerLink,
+          child: GestureDetector(
+            key: _triggerKey,
+            onTap: _toggleDropdown,
+            child: Container(
+              decoration: BoxDecoration(
+                color: AppColors.white,
+                borderRadius: BorderRadius.circular(12.r),
+                border: Border.all(color: AppColors.textFeildBorder),
+              ),
+              padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 15.h),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    _selectedItem != null
-                        ? widget.builder(_selectedItem!)
-                        : widget.hint,
-                    style: AppFonts.black14w400,
+                    _selectedValue ?? widget.hint,
+                    style: AppFonts.black18w400.copyWith(
+                      color: _selectedValue != null
+                          ? AppColors.secondary
+                          : AppColors.textGrey,
+                    ),
                   ),
-                  const Spacer(),
-                  Material(
-                    type: MaterialType.transparency,
-                    child: InkWell(
-                      onTap: _toggleExpansion,
-                      customBorder: const CircleBorder(),
-                      child: Padding(
-                        padding: EdgeInsets.all(4.w),
-                        child: AnimatedRotation(
-                          turns: _isExpanded ? 0.5 : 0,
-                          duration: const Duration(milliseconds: 200),
-                          child: Icon(TablerIcons.chevronDown, size: 20.sp),
-                        ),
-                      ),
+                  AnimatedRotation(
+                    turns: _isOpen ? 0.5 : 0,
+                    duration: const Duration(milliseconds: 200),
+                    child: Icon(
+                      TablerIcons.chevronDown,
+                      color: AppColors.secondary,
+                      size: 24.sp,
                     ),
                   ),
                 ],
               ),
-              AnimatedSize(
-                duration: const Duration(milliseconds: 250),
-                child: SizedBox(
-                  height: _isExpanded ? null : 0,
-                  child: ListView.separated(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: widget.items.length,
-                    itemBuilder: (_, index) {
-                      return InkWell(
-                        onTap: () {
-                          widget.onChanged?.call(widget.items[index]);
-                          _toggleExpansion();
-                        },
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(vertical: 10.h),
-                          child: Text(
-                            widget.builder(widget.items[index]),
-                            style: AppFonts.black14w400,
-                          ),
-                        ),
-                      );
-                    },
-                    separatorBuilder: (_, _) => const Divider(height: 0),
-                  ),
-                ),
-              ),
-            ],
+            ),
           ),
         ),
       ],
+    );
+  }
+}
+
+// ── Internal panel ───────────────────────────────────────────────────────────
+
+class _DropdownPanel extends StatelessWidget {
+  final List<String> options;
+  final String? selectedOption;
+  final ValueChanged<String> onSelect;
+
+  const _DropdownPanel({
+    required this.options,
+    required this.selectedOption,
+    required this.onSelect,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10.r),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.08),
+            blurRadius: 12.r,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: options.map((option) {
+          final bool isSelected = option == selectedOption;
+          return GestureDetector(
+            onTap: () => onSelect(option),
+            child: Container(
+              width: double.infinity,
+              margin: EdgeInsets.symmetric(vertical: 5.h),
+              decoration: BoxDecoration(
+                color: isSelected ? AppColors.black : Colors.white,
+                borderRadius: BorderRadius.circular(8.r),
+                border: Border.all(color: Colors.black, width: 1.w),
+              ),
+              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 5.h),
+              child: Text(
+                option,
+                style: AppFonts.black18w400.copyWith(
+                  color: isSelected ? Colors.white : Colors.black87,
+                ),
+              ),
+            ),
+          );
+        }).toList(),
+      ),
     );
   }
 }

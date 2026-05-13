@@ -14,16 +14,16 @@ enum BaseUrl {
 enum AppointmentType {
   health,
   training,
-  event;
+  career;
 
   String get label {
     switch (this) {
       case AppointmentType.health:
-        return 'Health';
+        return 'HEALTH';
       case AppointmentType.training:
-        return 'Training';
-      case AppointmentType.event:
-        return 'Event';
+        return 'TRAINING';
+      case AppointmentType.career:
+        return 'CAREER';
     }
   }
 
@@ -35,8 +35,8 @@ enum AppointmentType {
       case AppointmentType.training:
         return AppColors.secondary;
 
-      case AppointmentType.event:
-        return AppColors.greycolor2;
+      case AppointmentType.career:
+        return AppColors.secondary;
     }
   }
 
@@ -48,8 +48,8 @@ enum AppointmentType {
       case AppointmentType.training:
         return AppColors.lightBrown2;
 
-      case AppointmentType.event:
-        return AppColors.fillGreyColor;
+      case AppointmentType.career:
+        return AppColors.lightBrown2;
     }
   }
 }

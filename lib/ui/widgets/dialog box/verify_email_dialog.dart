@@ -6,6 +6,7 @@ import 'package:pinput/pinput.dart';
 import 'package:stride_sync/ui/resources/app_colors.dart';
 import 'package:stride_sync/ui/resources/app_fonts.dart';
 import 'package:stride_sync/ui/widgets/gradient_button.dart';
+import 'package:tabler_icons_plus/tabler_icons_plus.dart';
 
 Future<void> showVerifyEmailDialog(
   BuildContext context, {
@@ -73,63 +74,69 @@ class _VerifyEmailDialogState extends State<VerifyEmailDialog> {
   Widget build(BuildContext context) {
     return Dialog(
       backgroundColor: AppColors.white,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8.r),
-        side: BorderSide(color: AppColors.dialogBorder),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
       elevation: 10,
 
-      child: Column(
-        crossAxisAlignment: .center,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          SizedBox(height: 12.h),
-          Container(
-            width: 60.w,
-            height: 60.w,
-            decoration: BoxDecoration(
-              color: AppColors.secondary,
-              shape: BoxShape.circle,
-              boxShadow: [
-                BoxShadow(
-                  color: AppColors.secondary,
-                  blurRadius: 12,
-                  offset: const Offset(0, 4),
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 14.h),
+        child: Column(
+          crossAxisAlignment: .center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Align(
+              alignment: Alignment.topRight,
+              child: GestureDetector(
+                onTap: () => Navigator.pop(context),
+                child: Container(
+                  padding: EdgeInsets.all(7.5.w),
+                  decoration: BoxDecoration(
+                    border: .all(color: AppColors.borderColor),
+                    color: AppColors.white,
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(
+                    TablerIcons.x,
+                    size: 15.sp,
+                    color: AppColors.black,
+                  ),
                 ),
-              ],
-            ),
-            child: const Icon(
-              Icons.check_rounded,
-              color: Colors.white,
-              size: 30,
-            ),
-          ),
-          SizedBox(height: 28.h),
-
-          Text('Verify Email', style: AppFonts.brown32w700),
-          SizedBox(height: 20.h),
-
-          Text(
-            'We sent a code to ${widget.email}',
-            textAlign: TextAlign.center,
-            style: AppFonts.grey14w400,
-          ),
-          SizedBox(height: 24.h),
-          Padding(
-            padding: EdgeInsetsGeometry.symmetric(horizontal: 10.w),
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12.r),
-                border: .all(color: AppColors.borderColor),
               ),
+            ),
+            Container(
+              padding: EdgeInsets.all(28.w),
+              decoration: BoxDecoration(
+                color: AppColors.secondary,
+                shape: BoxShape.circle,
+                boxShadow: [
+                  BoxShadow(
+                    color: AppColors.secondary,
+                    blurRadius: 12,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
+              ),
+              child: Icon(TablerIcons.mail, color: Colors.white, size: 36.sp),
+            ),
+            SizedBox(height: 24.h),
+
+            Text('Verify Email', style: AppFonts.black18w700),
+            SizedBox(height: 10.h),
+
+            Text(
+              'We sent a code to ${widget.email}',
+              textAlign: TextAlign.center,
+              style: AppFonts.grey14w500,
+            ),
+            SizedBox(height: 24.h),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 14.0.w),
               child: Pinput(
                 mainAxisAlignment: MainAxisAlignment.center,
-                separatorBuilder: (index) => SizedBox(width: 16.w),
+                separatorBuilder: (index) => SizedBox(width: 10.w),
                 length: 6,
                 defaultPinTheme: PinTheme(
-                  width: 32.w,
-                  height: 30.h,
+                  width: 40.w,
+                  height: 40.h,
                   decoration: BoxDecoration(
                     color: AppColors.white,
                     border: Border.all(color: AppColors.black),
@@ -162,60 +169,43 @@ class _VerifyEmailDialogState extends State<VerifyEmailDialog> {
                 onCompleted: (pin) {},
               ),
             ),
-          ),
 
-          SizedBox(height: 20.h),
+            SizedBox(height: 20.h),
 
-          ValueListenableBuilder<bool>(
-            valueListenable: _canResend,
-            builder: (_, canResend, _) {
-              return GestureDetector(
-                onTap: () {
-                  if (canResend) {}
-                },
-                child: ValueListenableBuilder<int>(
-                  valueListenable: _remainingSeconds,
-                  builder: (_, seconds, _) {
-                    return Text(
-                      canResend
-                          ? 'Resend code'
-                          : 'Resend in ${seconds ~/ 60}:${(seconds % 60).toString().padLeft(2, '0')}',
-                      style: AppFonts.brown14w500,
-                    );
+            ValueListenableBuilder<bool>(
+              valueListenable: _canResend,
+              builder: (_, canResend, _) {
+                return GestureDetector(
+                  onTap: () {
+                    if (canResend) {}
                   },
-                ),
-              );
-            },
-          ),
-
-          SizedBox(height: 20.h),
-          Divider(height: 2.h, color: AppColors.black),
-          SizedBox(height: 20.h),
-
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.w),
-            child: Row(
-              children: [
-                Expanded(
-                  child: GestureDetector(
-                    onTap: () => Navigator.pop(context),
-                    child: Center(
-                      child: Text("Cancel", style: AppFonts.brown16w500),
-                    ),
+                  child: ValueListenableBuilder<int>(
+                    valueListenable: _remainingSeconds,
+                    builder: (_, seconds, _) {
+                      return Text(
+                        canResend
+                            ? 'Resend code'
+                            : 'Resend in ${seconds ~/ 60}:${(seconds % 60).toString().padLeft(2, '0')}',
+                        style: AppFonts.brown14w500,
+                      );
+                    },
                   ),
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: GradientButton(
-                    text: 'Verify',
-                    onPressed: widget.onVerify ?? () {},
-                  ),
-                ),
-              ],
+                );
+              },
             ),
-          ),
-          SizedBox(height: 20.h),
-        ],
+
+            SizedBox(height: 24.h),
+
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 31.w),
+              child: GradientButton(
+                text: 'Verify',
+                onPressed: widget.onVerify ?? () {},
+              ),
+            ),
+            SizedBox(height: 24.h),
+          ],
+        ),
       ),
     );
   }

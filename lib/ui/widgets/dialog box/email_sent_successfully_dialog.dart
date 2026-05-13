@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stride_sync/ui/resources/app_colors.dart';
 import 'package:stride_sync/ui/resources/app_fonts.dart';
+import 'package:stride_sync/ui/widgets/gradient_button.dart';
 
 Future<void> showEmailSentDialog(
   BuildContext context, {
@@ -24,78 +25,60 @@ class EmailSentDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog(
       backgroundColor: AppColors.white,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8.r),
-        side: BorderSide(color: AppColors.dialogBorder),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
       elevation: 10,
 
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          SizedBox(height: 28.h),
-          Container(
-            width: 60.w,
-            height: 60.w,
-            decoration: BoxDecoration(
-              color: AppColors.secondary,
-              shape: BoxShape.circle,
-              boxShadow: [
-                BoxShadow(
-                  color: AppColors.secondary.withOpacity(0.35),
-                  blurRadius: 12,
-                  offset: const Offset(0, 4),
-                ),
-              ],
-            ),
-            child: const Icon(
-              Icons.check_rounded,
-              color: Colors.white,
-              size: 30,
-            ),
-          ),
-          SizedBox(height: 28.h),
-
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.w),
-            child: Text(
-              'Email Successfully\nSent!',
-              textAlign: TextAlign.center,
-              style: AppFonts.brown32w700,
-            ),
-          ),
-          SizedBox(height: 20.h),
-
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.w),
-            child: Text(
-              "We've sent a password reset link to the email address you provided. Please check your inbox.",
-              textAlign: TextAlign.center,
-              style: AppFonts.grey14w400,
-            ),
-          ),
-          SizedBox(height: 20.h),
-
-          Divider(height: 2.h, color: AppColors.black),
-          SizedBox(height: 30.h),
-
-          GestureDetector(
-            onTap: () {
-              Navigator.pop(context);
-              onGoToLogin?.call();
-            },
-            child: SizedBox(
-              width: double.infinity,
-              child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 16.h),
-                child: Center(
-                  child: Text('Go to Login', style: AppFonts.brown16w500),
-                ),
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 28.w, vertical: 26.h),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              height: 92.w,
+              width: 92.w,
+              decoration: BoxDecoration(
+                color: AppColors.secondary,
+                shape: BoxShape.circle,
+                boxShadow: [
+                  BoxShadow(
+                    color: AppColors.secondary.withValues(alpha: 0.35),
+                    blurRadius: 12.r,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
+              ),
+              child: Icon(
+                Icons.check_rounded,
+                color: Colors.white,
+                size: 36.sp,
               ),
             ),
-          ),
-          SizedBox(height: 30.h),
-        ],
+            SizedBox(height: 24.h),
+
+            Text(
+              'Email Successfully Sent!',
+              textAlign: TextAlign.center,
+              style: AppFonts.black18w700,
+            ),
+            SizedBox(height: 10.h),
+
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10.w),
+              child: Text(
+                "We've sent a password reset link to the email address you provided. Please check your inbox.",
+                textAlign: TextAlign.center,
+                style: AppFonts.grey14w500,
+              ),
+            ),
+            SizedBox(height: 24.h),
+            GradientButton(
+              text: 'Login',
+              onPressed: () {
+                onGoToLogin?.call();
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

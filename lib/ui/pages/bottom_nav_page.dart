@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:stride_sync/ui/pages/event_page.dart';
 import 'package:stride_sync/ui/pages/home_page.dart';
-import 'package:stride_sync/ui/pages/horses_page.dart';
+import 'package:stride_sync/ui/pages/horse_page.dart';
 import 'package:stride_sync/ui/pages/profile_page.dart';
 import 'package:stride_sync/ui/resources/app_colors.dart';
 import 'package:stride_sync/ui/view_models/bottom_nav_view_model.dart';
@@ -19,7 +19,7 @@ class BottomNavPage extends StatelessWidget {
 
   static const List<Widget> _screens = [
     HomePage(),
-    HorsesPage(),
+    HorsePage(),
     EventPage(),
     ProfilePage(),
   ];

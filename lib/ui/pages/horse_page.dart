@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stride_sync/ui/pages/add_new_horse_page.dart';
@@ -8,14 +9,14 @@ import 'package:stride_sync/ui/widgets/horse_container.dart';
 import 'package:stride_sync/utils/enums.dart';
 import 'package:tabler_icons_plus/tabler_icons_plus.dart';
 
-class HorsesPage extends StatefulWidget {
-  const HorsesPage({super.key});
+class HorsePage extends StatefulWidget {
+  const HorsePage({super.key});
 
   @override
-  State<HorsesPage> createState() => _HorsesPageState();
+  State<HorsePage> createState() => _HorsePageState();
 }
 
-class _HorsesPageState extends State<HorsesPage> {
+class _HorsePageState extends State<HorsePage> {
   final GlobalKey _filterKey = GlobalKey();
   OverlayEntry? _overlayEntry;
   String _selectedSort = 'Oldest First';
@@ -162,22 +163,34 @@ class _HorsesPageState extends State<HorsesPage> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        onPressed: () {
+      floatingActionButton: GestureDetector(
+        onTap: () {
           Navigator.pushNamed(context, AddNewHorsePage.routeName);
         },
         child: Container(
-          height: 50.h,
+          height: 50.w,
           width: 50.w,
+
           padding: EdgeInsets.all(10.w),
           decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: const Color(0x14564336),
+                blurRadius: 40.r,
+                offset: Offset(0, 20.h),
+              ),
+            ],
             gradient: AppColors.buttonGradient,
             border: Border.all(color: AppColors.buttonBorder),
             shape: BoxShape.circle,
           ),
-          child: Icon(TablerIcons.plus, size: 30.sp, color: AppColors.white),
+          child: Center(
+            child: Icon(
+              CupertinoIcons.plus,
+              size: 30.sp,
+              color: AppColors.white,
+            ),
+          ),
         ),
       ),
     );

@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:stride_sync/constant/assets.dart';
 import 'package:stride_sync/ui/pages/bottom_nav_page.dart';
 import 'package:stride_sync/ui/pages/forgot_password_page.dart';
@@ -8,17 +11,35 @@ import 'package:stride_sync/ui/resources/app_colors.dart';
 import 'package:stride_sync/ui/resources/app_fonts.dart';
 import 'package:stride_sync/ui/widgets/dialog%20box/verify_email_dialog.dart';
 import 'package:stride_sync/ui/widgets/gradient_button.dart';
+import 'package:stride_sync/ui/widgets/image_selection_bottom_sheet.dart';
 import 'package:stride_sync/ui/widgets/text_form_field_with_title_widget.dart';
 import 'package:tabler_icons_plus/tabler_icons_plus.dart';
 
-class AuthPage extends StatelessWidget {
+class AuthPage extends StatefulWidget {
   static const String routeName = "/login";
 
   const AuthPage({super.key});
 
   @override
+  State<AuthPage> createState() => _AuthPageState();
+}
+
+class _AuthPageState extends State<AuthPage> {
+  final ValueNotifier<bool> isSignInPressed = ValueNotifier<bool>(true);
+  XFile? _selectedLogo;
+
+  Future<void> _pickLogo() async {
+    final file = await ImageSelectionBottomSheet.show(context: context);
+
+    if (file != null) {
+      setState(() {
+        _selectedLogo = file;
+      });
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final ValueNotifier<bool> isSignInPressed = ValueNotifier<bool>(true);
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -185,33 +206,43 @@ class AuthPage extends StatelessWidget {
       crossAxisAlignment: .start,
       children: [
         SizedBox(height: 10.h),
-        Center(
-          child: Stack(
+        GestureDetector(
+          onTap: _pickLogo,
+          child: Row(
             children: [
-              ClipOval(
-                child: Image.asset(
-                  DummyAssets.profile,
-                  height: 96.w,
-                  width: 96.w,
+              Container(
+                width: 90.w,
+                height: 90.w,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: AppColors.greyFill,
+                  border: Border.all(color: AppColors.borderColor),
+                  image: _selectedLogo != null
+                      ? DecorationImage(
+                          image: FileImage(File(_selectedLogo!.path)),
+                          fit: BoxFit.cover,
+                        )
+                      : null,
                 ),
+                child: _selectedLogo == null
+                    ? Icon(
+                        TablerIcons.photoUp,
+                        size: 36.sp,
+                        color: AppColors.secondary,
+                      )
+                    : null,
               ),
-              Positioned(
-                right: 1.w,
-                bottom: 1.h,
-                child: Container(
-                  height: 40.h,
-                  width: 40.w,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: AppColors.secondary,
-                    border: .all(color: AppColors.white, width: 2.w),
+              SizedBox(width: 20.w),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    _selectedLogo == null ? "Upload Logo" : "Change Logo",
+                    style: AppFonts.black18w500,
                   ),
-                  child: Icon(
-                    TablerIcons.upload,
-                    color: AppColors.white,
-                    size: 24.sp,
-                  ),
-                ),
+                  SizedBox(height: 5.h),
+                  Text("PNG or JPG, max 5MB", style: AppFonts.grey18w400),
+                ],
               ),
             ],
           ),
@@ -223,7 +254,7 @@ class AuthPage extends StatelessWidget {
           prefixIcon: TablerIcons.user,
         ),
         TextFormFieldWithTitleWidget(
-          title: 'Organization Name',
+          title: 'Organization Name (Display name)',
           controller: TextEditingController(),
           hintText: "Name Here",
           prefixIcon: TablerIcons.building,

@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:stride_sync/constant/assets.dart';
 import 'package:stride_sync/ui/resources/app_colors.dart';
 import 'package:stride_sync/ui/resources/app_fonts.dart';
+import 'package:stride_sync/ui/widgets/app_back_button.dart';
 import 'package:stride_sync/utils/enums.dart';
 import 'package:tabler_icons_plus/tabler_icons_plus.dart';
 
@@ -19,7 +20,7 @@ class HorseDetailPage extends StatelessWidget {
         automaticallyImplyLeading: false,
         title: Row(
           children: [
-           BackButton(),
+            AppBackButton(),
             SizedBox(width: 16.w),
 
             Text("Bella Details", style: AppFonts.black20w600),
@@ -86,7 +87,7 @@ class HorseDetailPage extends StatelessWidget {
                       child: Row(
                         children: [
                           Icon(
-                            TablerIcons.calendarMonth,
+                            TablerIcons.calendarWeek,
                             size: 22.sp,
                             color: AppColors.secondary,
                           ),
@@ -111,20 +112,75 @@ class HorseDetailPage extends StatelessWidget {
                       children: [
                         Expanded(
                           child: _buildBreedContainer(
-                            title: "Last Vet Check",
+                            title: "Top Speed",
                             value: "Oct 12, 2023",
                           ),
                         ),
                         SizedBox(width: 12.w),
                         Expanded(
                           child: _buildBreedContainer(
-                            title: "Breed",
+                            title: "Feed",
                             value: "Dutch Warmblood",
                           ),
                         ),
                       ],
                     ),
-                    SizedBox(height: 20.h),
+                    SizedBox(height: 10.h),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: _buildBreedContainer(
+                            title: "Color",
+                            value: "Brown",
+                          ),
+                        ),
+                        SizedBox(width: 12.w),
+                        Expanded(
+                          child: _buildBreedContainer(
+                            title: "Feed",
+                            value: "Dutch Warmblood",
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 10.h),
+                    _buildBreedContainer(
+                      width: double.infinity,
+                      title: "Last Vet Check",
+                      value: "Oct 12, 2023",
+                    ),
+                    SizedBox(height: 32.h),
+                    Text("Owner Info", style: AppFonts.black20w700),
+                    SizedBox(height: 10.h),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: _buildBreedContainer(
+                            color: AppColors.scaffoldBackground,
+                            title: "First Name",
+                            value: "John",
+                          ),
+                        ),
+                        SizedBox(width: 12.w),
+                        Expanded(
+                          child: _buildBreedContainer(
+                            color: AppColors.scaffoldBackground,
+                            title: "Last Name",
+                            value: "Doe",
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 10.h),
+                    _buildBreedContainer(
+                      color: AppColors.scaffoldBackground,
+                      width: double.infinity,
+                      title: "Contact Number",
+                      value: "000 000 0000",
+                    ),
+                    SizedBox(
+                      height: MediaQuery.paddingOf(context).bottom + 24.h,
+                    ),
                   ],
                 ),
               ),
@@ -135,12 +191,17 @@ class HorseDetailPage extends StatelessWidget {
     );
   }
 
-  Widget _buildBreedContainer({required String title, required String value}) {
+  Widget _buildBreedContainer({
+    required String title,
+    required String value,
+    double? width,
+    Color? color,
+  }) {
     return Container(
       padding: EdgeInsets.all(16.w),
-
+      width: width,
       decoration: BoxDecoration(
-        color: AppColors.lightBrown,
+        color: color ?? AppColors.lightBrown,
         borderRadius: BorderRadius.circular(12.r),
         border: Border.all(color: AppColors.borderColor),
       ),

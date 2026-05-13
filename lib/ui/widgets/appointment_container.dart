@@ -21,36 +21,44 @@ class AppointmentContainer extends StatelessWidget {
         border: Border.all(color: AppColors.borderColor),
       ),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start, // ← fixes tag alignment
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Date Box
+        
           Container(
             padding: EdgeInsets.symmetric(horizontal: 13.w, vertical: 6.h),
             decoration: BoxDecoration(
               color: AppColors.greyColor,
               borderRadius: BorderRadius.circular(12.r),
             ),
-            child: Text(
-              "${appointment.month}\n${appointment.day}",
-              textAlign: TextAlign.center,
-              style: AppFonts.black16w400,
+            child: Column(
+              children: [
+                Text(
+                  "${appointment.month}",
+                  textAlign: TextAlign.center,
+                  style: AppFonts.black12w500,
+                ),
+                Text(
+                  "${appointment.day}",
+                  textAlign: TextAlign.center,
+                  style: AppFonts.brown20w700,
+                ),
+              ],
             ),
           ),
           SizedBox(width: 10.w),
 
-          // Title & Subtitle
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: .center,
               children: [
-                Text(appointment.title, style: AppFonts.black14w400),
+                Text(appointment.title, style: AppFonts.black14w600),
                 SizedBox(height: 4.h),
-                Text(appointment.subtitle, style: AppFonts.grey10w400),
+                Text(appointment.subtitle, style: AppFonts.grey14w400),
               ],
             ),
           ),
 
-          // Type Badge
           Container(
             padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 2.h),
             decoration: BoxDecoration(
