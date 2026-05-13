@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:stride_sync/ui/pages/edit_profile.dart';
 import 'package:stride_sync/ui/resources/app_colors.dart';
 import 'package:stride_sync/ui/resources/app_fonts.dart';
 import 'package:stride_sync/ui/widgets/gradient_button.dart';
+import 'package:tabler_icons_plus/tabler_icons_plus.dart';
+
+import '../../constant/assets.dart';
+import '../widgets/custom_app_bar.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -10,7 +15,11 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.scaffoldBackground,
+      appBar: CustomAppBar(
+        title: "Profile Setting",
+        // leadingWidget: Icon(Icons.menu, size: 30.sp),
+        // actionIcon:    Icons.settings_outlined,
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: 20.w),
@@ -18,32 +27,7 @@ class ProfilePage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(height: 20.h),
-              // Header Section
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Profile Setting',
-                    style: AppFonts.black20w600,
-                  ),
-                  Container(
-                    width: 40.w,
-                    height: 40.h,
-                    decoration: BoxDecoration(
-                      gradient: AppColors.buttonGradient,
-                      borderRadius: BorderRadius.circular(12.r),
-                      border: Border.all(color: AppColors.buttonBorder, width: 1.w),
-                    ),
-                    child: Icon(
-                      Icons.settings_outlined,
-                      color: AppColors.white,
-                      size: 22.sp,
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 28.h),
-              // Profile Info Card
+
               Container(
                 width: double.infinity,
                 padding: EdgeInsets.symmetric(vertical: 20.h),
@@ -61,8 +45,8 @@ class ProfilePage extends StatelessWidget {
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             border: Border.all(color: AppColors.white, width: 4.w),
-                            image: const DecorationImage(
-                              image: NetworkImage("https://placehold.co/128x128"),
+                            image:  DecorationImage(
+                              image: AssetImage(DummyAssets.profile),
                               fit: BoxFit.cover,
                             ),
                             boxShadow: [
@@ -210,25 +194,28 @@ class ProfilePage extends StatelessWidget {
                 child: Column(
                   children: [
                     _buildSettingTile(
-                      icon: Icons.person_outline,
+                      icon: TablerIcons.userCircle,
                       title: 'Edit Profile',
-                      onTap: () {},
+                      onTap: ()=>Navigator.pushNamed(context, EditProfile.routeName)
                     ),
                     SizedBox(height: 12.h),
                     _buildSettingTile(
-                      icon: Icons.lock_outline,
+                      icon: TablerIcons.lock,
                       title: 'Change Password',
                       onTap: () {},
                     ),
                     SizedBox(height: 12.h),
                     _buildSettingTile(
-                      icon: Icons.notifications_none,
+                      icon: TablerIcons.bell,
                       title: 'Notifications',
-                      trailing: Switch(
-                        value: true,
-                        onChanged: (v) {},
-                        activeColor: AppColors.white,
-                        activeTrackColor: AppColors.secondary,
+                      trailing: Transform.scale(
+                        scale: 0.70,
+                        child: Switch(
+                          value: true,
+                          onChanged: (v) {},
+                          activeColor: AppColors.white,
+                          activeTrackColor: AppColors.secondary,
+                        ),
                       ),
                       onTap: () {},
                     ),
@@ -241,7 +228,7 @@ class ProfilePage extends StatelessWidget {
                     SizedBox(height: 16.h),
                     GradientButton(
                       text: 'Logout',
-                      icon: Icons.logout,
+                      icon: TablerIcons.logout2,
                       onPressed: () {},
                     ),
                   ],
@@ -266,9 +253,10 @@ class ProfilePage extends StatelessWidget {
       borderRadius: BorderRadius.circular(12.r),
       child: Container(
         width: double.infinity,
+        height: 50.h,
         padding: EdgeInsets.all(16.r),
         decoration: BoxDecoration(
-          color: const Color(0xFFF6F6F6),
+          color: AppColors.fillColor,
           borderRadius: BorderRadius.circular(12.r),
         ),
         child: Row(

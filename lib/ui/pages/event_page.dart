@@ -1,6 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stride_sync/constant/assets.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:intl/intl.dart';
@@ -368,7 +368,30 @@ class _EventPageState extends State<EventPage> {
         onTap: () {
           Navigator.pushNamed(context, AddEventScreen.routeName);
         },
-        child: SvgPicture.asset(SvgAssets.floatingBtn),
+        child: Container(
+        height: 50.w,
+        width: 50.w,
+        padding: EdgeInsets.all(10.w),
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: const Color(0x14564336),
+              blurRadius: 40.r,
+              offset: Offset(0, 20.h),
+            ),
+          ],
+          gradient: AppColors.buttonGradient,
+          border: Border.all(color: AppColors.buttonBorder),
+          shape: BoxShape.circle,
+        ),
+        child: Center(
+          child: Icon(
+            CupertinoIcons.plus,
+            size: 30.sp,
+            color: AppColors.white,
+          ),
+        ),
+      ),
       ),
     );
   }

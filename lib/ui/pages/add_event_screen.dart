@@ -1,12 +1,17 @@
-import 'package:dropdown_button2/dropdown_button2.dart';
+import 'dart:io';
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:stride_sync/constant/assets.dart';
 import 'package:tabler_icons_plus/tabler_icons_plus.dart';
-
 import '../resources/app_colors.dart';
 import '../resources/app_fonts.dart';
+import '../widgets/app_back_button.dart';
+import '../widgets/app_drop_down.dart';
 import '../widgets/custom_app_bar.dart';
+import '../widgets/gradient_button.dart';
+import '../widgets/image_selection_bottom_sheet.dart';
 import '../widgets/text_form_field_with_title_widget.dart';
 
 class AddEventScreen extends StatefulWidget {
@@ -23,8 +28,21 @@ class _AddEventScreenState extends State<AddEventScreen> {
 
   final TextEditingController dateController = TextEditingController();
   final TextEditingController timeController = TextEditingController();
+
   bool isMultiDay = false;
   bool reminder = false;
+
+  XFile? _selectedHorseImage;
+  XFile? _selectedEventImage;
+
+
+  @override
+  void dispose() {
+    dateController.dispose();
+    timeController.dispose();
+    super.dispose();
+  }
+
 
 
   final List<String> users = ['Galileo', 'Newton', 'Einstein'];
@@ -32,17 +50,8 @@ class _AddEventScreenState extends State<AddEventScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        leadingWidget: Container(
-          height: 32.h,
-          width: 32.h,
-          padding: EdgeInsets.all(6.w),
-          decoration: BoxDecoration(
-            color: AppColors.containerGrey,
-            borderRadius: BorderRadius.circular(12.sp),
-            border: Border.all(color: AppColors.containerBorder),
-          ),
-          child: Icon(Icons.arrow_back, size: 20.sp),
-        ),
+        leadingWidget: AppBackButton(),
+
         title: 'Add New Event',
       ),
       body: SafeArea(
@@ -53,20 +62,83 @@ class _AddEventScreenState extends State<AddEventScreen> {
               children: [
                 Container(
                   padding: EdgeInsets.symmetric(
-                    vertical: 12.h,
+                    vertical: 14.h,
                     horizontal: 16.w,
                   ),
                   color: AppColors.white,
                   child: Column(
                     crossAxisAlignment: .start,
                     children: [
+                      GestureDetector(
+                        onTap: () async {
+                          final file = await ImageSelectionBottomSheet.show(
+                            context: context,
+                          );
+
+                          if (file != null) {
+                            setState(() {
+                              _selectedEventImage = file;
+                            });
+                          }
+                        },
+
+                        child: DottedBorder(
+                          options: RoundedRectDottedBorderOptions(
+                            color: AppColors.secondary,
+                            radius: Radius.circular(12.r),
+                            dashPattern: [6, 5],
+                            strokeWidth: 2.w,
+                            padding: EdgeInsets.zero,
+                          ),
+                          child: Container(
+                            padding: EdgeInsets.all(30.w),
+                            width: double.infinity,
+                            color: AppColors.buttonBorder.withValues(alpha: 0.20),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  padding: EdgeInsets.all(10.w),
+                                  decoration: BoxDecoration(
+                                    gradient: AppColors.buttonGradient,
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: Icon(
+                                    TablerIcons.cameraPlus,
+                                    size: 22.sp,
+                                    color: AppColors.white,
+                                  ),
+                                ),
+                                SizedBox(height: 20.h),
+                                    Text(
+                                      "Upload Event Photo",
+                                      style: AppFonts.black20w600,
+                                      textAlign: TextAlign.center,
+                                ),
+                                SizedBox(height: 4.h),
+                                Text(
+                                  "SVG, PNG, or PDF (max 10MB)",
+                                  style: AppFonts.grey14w400,
+                                  textAlign: TextAlign.center,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 20.h),
                       TextFormFieldWithTitleWidget(
                         title: 'Event Title',
                         controller: TextEditingController(),
                         hintText: "e.g., Morning Dressage",
                       ),
                       SizedBox(height: 20.h),
-                      eventTypeWidget(),
+                      CustomDropdown(
+                        label: 'Event Type',
+                        hint: 'Select Event',
+                        options: ['Career Events', 'Veterinary', 'Routine Care'],
+                        onChanged: (value) {},
+                      ),
                       TextFormFieldWithTitleWidget(
                         title: 'Location',
                         controller: TextEditingController(),
@@ -95,6 +167,81 @@ class _AddEventScreenState extends State<AddEventScreen> {
                       ),
                       SizedBox(height: 20.h),
                       Text(
+                        'Upload Flyer Image',
+                        style: AppFonts.grey18w400,
+                        textAlign: .start,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      SizedBox(height: 20.h),
+                      GestureDetector(
+                        onTap: () async {
+                          final file = await ImageSelectionBottomSheet.show(
+                            context: context,
+                          );
+
+                          if (file != null) {
+                            setState(() {
+                              _selectedHorseImage = file;
+                            });
+                          }
+                        },
+                        child: DottedBorder(
+                          options: RoundedRectDottedBorderOptions(
+                            color: AppColors.secondary,
+                            radius: Radius.circular(12.r),
+                            dashPattern: [6, 5],
+                            strokeWidth: 2.w,
+                            padding: EdgeInsets.zero,
+                          ),
+                          child: Container(
+                            height: 240.h,
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12.r),
+                              image: DecorationImage(
+                                image: _selectedHorseImage != null
+                                    ? FileImage(File(_selectedHorseImage!.path))
+                                    : const AssetImage(DummyAssets.horseDetail)
+                                as ImageProvider,
+                                fit: BoxFit.cover,
+                                opacity: _selectedHorseImage != null ? 1 : 0.4,
+                              ),
+                            ),
+                            child: _selectedHorseImage != null
+                                ? const SizedBox.shrink()
+                                : Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  padding: EdgeInsets.all(10.w),
+                                  decoration: BoxDecoration(
+                                    gradient: AppColors.buttonGradient,
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: Icon(
+                                    TablerIcons.cameraPlus,
+                                    size: 22.sp,
+                                    color: AppColors.white,
+                                  ),
+                                ),
+                                SizedBox(height: 20.h),
+                                Text(
+                                  "Upload Horse Photo",
+                                  style: AppFonts.black20w700,
+                                ),
+                                SizedBox(height: 4.h),
+                                Text(
+                                  "PNG or JPG, max 10MB",
+                                  style: AppFonts.grey14w400,
+                                  textAlign: TextAlign.center,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 20.h),
+                      Text(
                         'Reminder',
                         style: AppFonts.grey18w400,
                         textAlign: .start,
@@ -102,11 +249,45 @@ class _AddEventScreenState extends State<AddEventScreen> {
                       ),
                       SizedBox(height: 20.h),
                       reminderWidget(),
+
+
                     ],
                   ),
                 ),
               ],
             ),
+          ),
+        ),
+      ),
+      bottomNavigationBar: SafeArea(
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
+          decoration: const BoxDecoration(color: Colors.white),
+          child: Row(
+            children: [
+              Expanded(
+                child: GestureDetector(
+                  onTap: () => Navigator.pop(context),
+                  child: Container(
+                    height: 50.h,
+                    alignment: Alignment.center,
+                    child: Text("Cancel", style: AppFonts.brown16w500),
+                  ),
+                ),
+              ),
+
+              SizedBox(width: 12.w),
+
+              Expanded(
+                child: SizedBox(
+                  height: 50.h,
+                  child: GradientButton(
+                    text: 'Create Event',
+                    onPressed: () => Navigator.pop(context),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),
@@ -293,65 +474,6 @@ class _AddEventScreenState extends State<AddEventScreen> {
   }
 
 
-  Widget eventTypeWidget() {
-    final List<String> eventTypes = [
-      "Meeting",
-      "Conference",
-    ];
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Event Type',
-          style: AppFonts.grey18w400,
-          textAlign: TextAlign.start,
-          overflow: TextOverflow.ellipsis,
-        ),
-        SizedBox(height: 20.h),
-
-        DropdownButtonFormField2<String>(
-          isExpanded: true,
-          decoration: const InputDecoration(
-            contentPadding: EdgeInsets.zero,
-            hintText: "Select Event",
-          ),
-
-          hint: Text(
-            "Select Event",
-            style: AppFonts.grey18w400,
-          ),
-
-          items: eventTypes
-              .map(
-                (item) => DropdownItem<String>(
-              value: item,
-              child: Text(
-                item,
-                style: AppFonts.black14w400,
-              ),
-            ),
-          )
-              .toList(),
-
-          onChanged: (value) {
-            // handle selection
-          },
-
-          iconStyleData: const IconStyleData(
-            icon: Icon(Icons.keyboard_arrow_down),
-            iconSize: 24,
-          ),
-
-          dropdownStyleData: DropdownStyleData(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12.r),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
   Widget reminderWidget() {
     return Container(
       width: double.infinity,

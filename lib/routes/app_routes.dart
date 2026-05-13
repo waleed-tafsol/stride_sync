@@ -9,6 +9,7 @@ import 'package:stride_sync/ui/pages/splash_page.dart';
 import 'package:stride_sync/ui/pages/subscription_page.dart';
 
 import '../ui/pages/add_event_screen.dart';
+import '../ui/pages/edit_profile.dart';
 
 abstract final class AppRoutes {
   static final navigatorKey = GlobalKey<NavigatorState>();
@@ -47,6 +48,10 @@ abstract final class AppRoutes {
       AddEventScreen.routeName => CupertinoPageRoute(
         settings: const RouteSettings(name: AddEventScreen.routeName),
         builder: (_) => const AddEventScreen(),
+      ),
+      EditProfile.routeName => CupertinoPageRoute(
+        settings: const RouteSettings(name: EditProfile.routeName),
+        builder: (_) => const EditProfile(),
       ),
 
       null => throw UnimplementedError(),

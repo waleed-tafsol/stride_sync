@@ -170,7 +170,6 @@ class _HorsePageState extends State<HorsePage> {
         child: Container(
           height: 50.w,
           width: 50.w,
-
           padding: EdgeInsets.all(10.w),
           decoration: BoxDecoration(
             boxShadow: [
