@@ -20,7 +20,7 @@ class BottomNavPage extends StatelessWidget {
   static const List<Widget> _screens = [
     HomePage(),
     HorsesPage(),
-    AddEventScreen(),
+    EventPage(),
     ProfilePage(),
   ];
 
