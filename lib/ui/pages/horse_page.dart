@@ -209,7 +209,7 @@ class _HorsePageState extends State<HorsePage> {
         margin: EdgeInsets.symmetric(vertical: 6.h),
         padding: EdgeInsets.symmetric(vertical: 16.h),
         decoration: BoxDecoration(
-          color: isSelected ? const Color(0xFF1A3A2A) : AppColors.white,
+          color: isSelected ? AppColors.black : AppColors.white,
           borderRadius: BorderRadius.circular(12.r),
           border: Border.all(
             color: isSelected ? Colors.transparent : Colors.grey.shade300,

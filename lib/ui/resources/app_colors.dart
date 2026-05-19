@@ -19,7 +19,7 @@ abstract final class AppColors {
   static const white = Colors.white;
   static const black = Color(0xFF061B0E);
   static const fillColor = Color(0xFFFBF9F8);
-  static const containerGrey = Color(0xFFD9D9D9);
+  static const containerGrey = Color(0xFFF6F6F6);
   static const containerBorder = Color(0xFFC5C5C5);
   static const buttonBorder = Color(0xFFFFDCC0);
   static const dialogBorder = Color(0xFFAAAAAA);

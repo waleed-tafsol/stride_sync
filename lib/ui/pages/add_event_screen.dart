@@ -35,15 +35,12 @@ class _AddEventScreenState extends State<AddEventScreen> {
   XFile? _selectedHorseImage;
   XFile? _selectedEventImage;
 
-
   @override
   void dispose() {
     dateController.dispose();
     timeController.dispose();
     super.dispose();
   }
-
-
 
   final List<String> users = ['Galileo', 'Newton', 'Einstein'];
   @override
@@ -77,11 +74,10 @@ class _AddEventScreenState extends State<AddEventScreen> {
 
                           if (file != null) {
                             setState(() {
-                              _selectedEventImage = file;
+                              _selectedHorseImage = file;
                             });
                           }
                         },
-
                         child: DottedBorder(
                           options: RoundedRectDottedBorderOptions(
                             color: AppColors.secondary,
@@ -91,38 +87,49 @@ class _AddEventScreenState extends State<AddEventScreen> {
                             padding: EdgeInsets.zero,
                           ),
                           child: Container(
-                            padding: EdgeInsets.all(30.w),
+                            height: 240.h,
                             width: double.infinity,
-                            color: AppColors.buttonBorder.withValues(alpha: 0.20),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Container(
-                                  padding: EdgeInsets.all(10.w),
-                                  decoration: BoxDecoration(
-                                    gradient: AppColors.buttonGradient,
-                                    shape: BoxShape.circle,
-                                  ),
-                                  child: Icon(
-                                    TablerIcons.cameraPlus,
-                                    size: 22.sp,
-                                    color: AppColors.white,
-                                  ),
-                                ),
-                                SizedBox(height: 20.h),
-                                    Text(
-                                      "Upload Event Photo",
-                                      style: AppFonts.black20w600,
-                                      textAlign: TextAlign.center,
-                                ),
-                                SizedBox(height: 4.h),
-                                Text(
-                                  "SVG, PNG, or PDF (max 10MB)",
-                                  style: AppFonts.grey14w400,
-                                  textAlign: TextAlign.center,
-                                ),
-                              ],
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12.r),
+                              image: DecorationImage(
+                                image: _selectedHorseImage != null
+                                    ? FileImage(File(_selectedHorseImage!.path))
+                                    : const AssetImage(DummyAssets.horseDetail)
+                                          as ImageProvider,
+                                fit: BoxFit.cover,
+                                opacity: _selectedHorseImage != null ? 1 : 0.4,
+                              ),
                             ),
+                            child: _selectedHorseImage != null
+                                ? const SizedBox.shrink()
+                                : Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Container(
+                                        padding: EdgeInsets.all(10.w),
+                                        decoration: BoxDecoration(
+                                          gradient: AppColors.buttonGradient,
+                                          shape: BoxShape.circle,
+                                        ),
+                                        child: Icon(
+                                          TablerIcons.cameraPlus,
+                                          size: 22.sp,
+                                          color: AppColors.white,
+                                        ),
+                                      ),
+                                      SizedBox(height: 20.h),
+                                      Text(
+                                        "Upload Horse Photo",
+                                        style: AppFonts.black20w700,
+                                      ),
+                                      SizedBox(height: 4.h),
+                                      Text(
+                                        "PNG or JPG, max 10MB",
+                                        style: AppFonts.grey14w400,
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ],
+                                  ),
                           ),
                         ),
                       ),
@@ -136,7 +143,11 @@ class _AddEventScreenState extends State<AddEventScreen> {
                       CustomDropdown(
                         label: 'Event Type',
                         hint: 'Select Event',
-                        options: ['Career Events', 'Veterinary', 'Routine Care'],
+                        options: [
+                          'Career Events',
+                          'Veterinary',
+                          'Routine Care',
+                        ],
                         onChanged: (value) {},
                       ),
                       TextFormFieldWithTitleWidget(
@@ -174,17 +185,7 @@ class _AddEventScreenState extends State<AddEventScreen> {
                       ),
                       SizedBox(height: 20.h),
                       GestureDetector(
-                        onTap: () async {
-                          final file = await ImageSelectionBottomSheet.show(
-                            context: context,
-                          );
-
-                          if (file != null) {
-                            setState(() {
-                              _selectedHorseImage = file;
-                            });
-                          }
-                        },
+                        onTap: () {},
                         child: DottedBorder(
                           options: RoundedRectDottedBorderOptions(
                             color: AppColors.secondary,
@@ -194,22 +195,15 @@ class _AddEventScreenState extends State<AddEventScreen> {
                             padding: EdgeInsets.zero,
                           ),
                           child: Container(
-                            height: 240.h,
-                            width: double.infinity,
+                            padding: EdgeInsets.symmetric(vertical: 36.w),
                             decoration: BoxDecoration(
+                              color: AppColors.lightBrown,
                               borderRadius: BorderRadius.circular(12.r),
-                              image: DecorationImage(
-                                image: _selectedHorseImage != null
-                                    ? FileImage(File(_selectedHorseImage!.path))
-                                    : const AssetImage(DummyAssets.horseDetail)
-                                as ImageProvider,
-                                fit: BoxFit.cover,
-                                opacity: _selectedHorseImage != null ? 1 : 0.4,
-                              ),
                             ),
-                            child: _selectedHorseImage != null
-                                ? const SizedBox.shrink()
-                                : Column(
+
+                            width: double.infinity,
+
+                            child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Container(
@@ -226,8 +220,8 @@ class _AddEventScreenState extends State<AddEventScreen> {
                                 ),
                                 SizedBox(height: 20.h),
                                 Text(
-                                  "Upload Horse Photo",
-                                  style: AppFonts.black20w700,
+                                  "Upload Flyer Image",
+                                  style: AppFonts.darkBrown20w700,
                                 ),
                                 SizedBox(height: 4.h),
                                 Text(
@@ -240,6 +234,7 @@ class _AddEventScreenState extends State<AddEventScreen> {
                           ),
                         ),
                       ),
+
                       SizedBox(height: 20.h),
                       Text(
                         'Reminder',
@@ -249,8 +244,6 @@ class _AddEventScreenState extends State<AddEventScreen> {
                       ),
                       SizedBox(height: 20.h),
                       reminderWidget(),
-
-
                     ],
                   ),
                 ),
@@ -312,7 +305,7 @@ class _AddEventScreenState extends State<AddEventScreen> {
               TextFormField(
                 controller: dateController,
                 readOnly: true,
-                onTap: ()async{
+                onTap: () async {
                   FocusScope.of(context).unfocus();
                   DateTime? pickedDate = await showDatePicker(
                     context: context,
@@ -323,14 +316,17 @@ class _AddEventScreenState extends State<AddEventScreen> {
 
                   if (pickedDate != null) {
                     dateController.text =
-                    "${pickedDate.day}/${pickedDate.month}/${pickedDate.year}";
+                        "${pickedDate.day}/${pickedDate.month}/${pickedDate.year}";
                   }
                 },
                 onTapOutside: (_) => FocusScope.of(context).unfocus(),
                 decoration: InputDecoration(
-                  hintText:"Arena A",
-                  suffixIcon: Icon(TablerIcons.calendarDue, color: AppColors.secondary, size: 24.sp)
-
+                  hintText: "Arena A",
+                  suffixIcon: Icon(
+                    TablerIcons.calendarDue,
+                    color: AppColors.secondary,
+                    size: 24.sp,
+                  ),
                 ),
               ),
             ],
@@ -350,7 +346,7 @@ class _AddEventScreenState extends State<AddEventScreen> {
               TextFormField(
                 controller: timeController,
                 readOnly: true,
-                onTap: ()async{
+                onTap: () async {
                   FocusScope.of(context).unfocus();
 
                   TimeOfDay? pickedTime = await showTimePicker(
@@ -361,13 +357,15 @@ class _AddEventScreenState extends State<AddEventScreen> {
                   if (pickedTime != null) {
                     timeController.text = pickedTime.format(context);
                   }
-
                 },
                 onTapOutside: (_) => FocusScope.of(context).unfocus(),
                 decoration: InputDecoration(
-                    hintText:"08:30 AM",
-                    suffixIcon: Icon(TablerIcons.historyToggle, color: AppColors.secondary, size: 24.sp)
-
+                  hintText: "08:30 AM",
+                  suffixIcon: Icon(
+                    TablerIcons.historyToggle,
+                    color: AppColors.secondary,
+                    size: 24.sp,
+                  ),
                 ),
               ),
             ],
@@ -438,7 +436,7 @@ class _AddEventScreenState extends State<AddEventScreen> {
     );
   }
 
-  Widget multiDayEventWidget(){
+  Widget multiDayEventWidget() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -450,7 +448,7 @@ class _AddEventScreenState extends State<AddEventScreen> {
         ),
         SizedBox(height: 20.h),
         TextFormField(
-          controller: TextEditingController(text:  isMultiDay ? "Yes" : "No",),
+          controller: TextEditingController(text: isMultiDay ? "Yes" : "No"),
           readOnly: true,
           onTapOutside: (_) => FocusScope.of(context).unfocus(),
           decoration: InputDecoration(
@@ -464,20 +462,20 @@ class _AddEventScreenState extends State<AddEventScreen> {
                     isMultiDay = value;
                   });
                 },
-                activeColor: AppColors.secondary,
+                activeColor: AppColors.white,
+                activeTrackColor: AppColors.secondary,
               ),
             ),
           ),
-        )
+        ),
       ],
     );
   }
 
-
   Widget reminderWidget() {
     return Container(
       width: double.infinity,
-      padding:  EdgeInsets.all(12.w),
+      padding: EdgeInsets.all(12.w),
       decoration: ShapeDecoration(
         color: AppColors.containerGrey,
         shape: RoundedRectangleBorder(
@@ -494,7 +492,7 @@ class _AddEventScreenState extends State<AddEventScreen> {
               color: const Color(0xFFE4E2DD),
               borderRadius: BorderRadius.circular(12),
             ),
-            child:  Icon(
+            child: Icon(
               Icons.notifications_none,
               size: 24.sp,
               color: AppColors.secondary,
@@ -505,15 +503,9 @@ class _AddEventScreenState extends State<AddEventScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  "Set Reminder",
-                  style: AppFonts.black14w400,
-                ),
+                Text("Set Reminder", style: AppFonts.black14w400),
                 const SizedBox(height: 3),
-                Text(
-                  "Notify 1 hour before event",
-                  style: AppFonts.grey10w400,
-                ),
+                Text("Notify 1 hour before event", style: AppFonts.grey10w400),
               ],
             ),
           ),
@@ -526,17 +518,14 @@ class _AddEventScreenState extends State<AddEventScreen> {
               onChanged: (value) {
                 setState(() {
                   reminder = !reminder;
-
                 });
               },
-              activeColor: AppColors.secondary,
+              activeColor: AppColors.white,
+              activeTrackColor: AppColors.secondary,
             ),
-          )
+          ),
         ],
       ),
     );
   }
-
-
-
 }
