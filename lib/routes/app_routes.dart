@@ -1,15 +1,14 @@
 import 'package:flutter/cupertino.dart';
-import 'package:provider/provider.dart';
-import 'package:stride_sync/ui/pages/add_new_horse_page.dart';
-import 'package:stride_sync/ui/pages/auth_page.dart';
-import 'package:stride_sync/ui/pages/bottom_nav_page.dart';
-import 'package:stride_sync/ui/pages/forgot_password_page.dart';
-import 'package:stride_sync/ui/pages/horse_detail_page.dart';
-import 'package:stride_sync/ui/pages/splash_page.dart';
-import 'package:stride_sync/ui/pages/subscription_page.dart';
 
 import '../ui/pages/add_event_screen.dart';
+import '../ui/pages/add_new_horse_page.dart';
+import '../ui/pages/auth_page.dart';
+import '../ui/pages/bottom_nav_page.dart';
 import '../ui/pages/edit_profile.dart';
+import '../ui/pages/forgot_password_page.dart';
+import '../ui/pages/horse_detail_page.dart';
+import '../ui/pages/splash_page.dart';
+import '../ui/pages/subscription_page.dart';
 
 abstract final class AppRoutes {
   static final navigatorKey = GlobalKey<NavigatorState>();
@@ -33,15 +32,15 @@ abstract final class AppRoutes {
         settings: const RouteSettings(name: SubscriptionPage.routeName),
         builder: (_) => const SubscriptionPage(),
       ),
-       BottomNavPage.routeName => CupertinoPageRoute(
+      BottomNavPage.routeName => CupertinoPageRoute(
         settings: const RouteSettings(name: BottomNavPage.routeName),
         builder: (_) => const BottomNavPage(),
       ),
-       HorseDetailPage.routeName => CupertinoPageRoute(
+      HorseDetailPage.routeName => CupertinoPageRoute(
         settings: const RouteSettings(name: HorseDetailPage.routeName),
         builder: (_) => const HorseDetailPage(),
       ),
-         AddNewHorsePage.routeName => CupertinoPageRoute(
+      AddNewHorsePage.routeName => CupertinoPageRoute(
         settings: const RouteSettings(name: AddNewHorsePage.routeName),
         builder: (_) => const AddNewHorsePage(),
       ),

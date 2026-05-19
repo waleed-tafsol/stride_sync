@@ -1,14 +1,16 @@
-import 'package:flutter/material.dart';
-import 'package:stride_sync/ui/view_models/base_view_model.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class BottomNavProvider extends BaseViewModel {
-  int _currentIndex = 0;
+import 'base_view_model.dart';
 
-  int get currentIndex => _currentIndex;
+class BottomNavProvider extends BaseViewModel<int> {
+  BottomNavProvider._() : super(0);
 
   void setIndex(int index) {
-    if (_currentIndex == index) return;
-    _currentIndex = index;
-    notifyListeners();
+    if (state == index) return;
+    state = index;
   }
 }
+
+final bottomNavProvider = NotifierProvider.autoDispose(
+  () => BottomNavProvider._(),
+);

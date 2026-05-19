@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
-import 'package:stride_sync/ui/pages/splash_page.dart';
-import 'package:stride_sync/ui/resources/app_colors.dart';
-import 'package:stride_sync/ui/resources/app_fonts.dart';
-import 'package:stride_sync/ui/resources/design_size.dart';
-import 'package:stride_sync/routes/app_routes.dart';
-import 'package:stride_sync/ui/themes/app_theme.dart';
-import 'package:stride_sync/ui/view_models/auth_view_model.dart';
-import 'package:stride_sync/ui/view_models/theme_view_model.dart';
+
+import 'routes/app_routes.dart';
+import 'ui/pages/splash_page.dart';
+import 'ui/resources/app_colors.dart';
+import 'ui/resources/app_fonts.dart';
+import 'ui/resources/design_size.dart';
+import 'ui/themes/app_theme.dart';
+import 'ui/view_models/theme_view_model.dart';
 
 class StridSyncApp extends StatelessWidget {
   const StridSyncApp({super.key});
@@ -50,13 +50,14 @@ class StridSyncApp extends StatelessWidget {
           ensureScreenSize: true,
           minTextAdapt: true,
           splitScreenMode: true,
-          child: Consumer<ThemeViewModel>(
-            builder: (_, vm, _) {
+          child: Consumer(
+            builder: (_, ref, _) {
+              final themeMode = ref.watch(themeProvider);
               return MaterialApp(
                 debugShowCheckedModeBanner: false,
                 navigatorKey: AppRoutes.navigatorKey,
                 title: 'Stride Sync',
-                themeMode: vm.themeMode,
+                themeMode: themeMode,
                 theme: AppTheme.lightTheme,
                 darkTheme: AppTheme.lightTheme,
                 initialRoute: SplashPage.routeName,
@@ -67,14 +68,7 @@ class StridSyncApp extends StatelessWidget {
                     data: MediaQuery.of(
                       context,
                     ).copyWith(textScaler: const TextScaler.linear(1.0)),
-                    child: MultiProvider(
-                      providers: [
-                        ChangeNotifierProvider(create: (_) => AuthViewModel()),
-                      ],
-                      builder: (_, _) {
-                        return FlutterEasyLoading(child: child);
-                      },
-                    ),
+                    child: FlutterEasyLoading(child: child),
                   );
                 },
               );

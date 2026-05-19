@@ -1,25 +1,22 @@
 import 'dart:developer';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../exceptions/app_exception.dart';
 
-abstract class BaseViewModel extends ChangeNotifier {
-  bool _loading = false;
+abstract class BaseViewModel<S> extends Notifier<S> {
+  final S initialState;
 
-  BaseViewModel() {
+  BaseViewModel(this.initialState);
+
+  @override
+  S build() {
     WidgetsBinding.instance.addPostFrameCallback((_) => init());
-  }
-
-  set loading(bool newValue) {
-    _loading = newValue;
-    notifyListeners();
-  }
-
-  bool get loading {
-    return _loading;
+    ref.onDispose(dispose);
+    return initialState;
   }
 
   @mustCallSuper
@@ -47,9 +44,7 @@ abstract class BaseViewModel extends ChangeNotifier {
   }
 
   @mustCallSuper
-  @override
   void dispose() {
     log('DISPOSING $runtimeType', name: 'PROVIDER');
-    super.dispose();
   }
 }

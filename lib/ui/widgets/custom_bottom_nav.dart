@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
-import 'package:stride_sync/ui/resources/app_colors.dart';
-import 'package:stride_sync/ui/resources/app_fonts.dart';
-import 'package:stride_sync/ui/view_models/bottom_nav_view_model.dart';
 import 'package:tabler_icons_plus/tabler_icons_plus.dart';
 
-class CustomBottomNavBar extends StatelessWidget {
+import '../resources/app_colors.dart';
+import '../resources/app_fonts.dart';
+import '../view_models/bottom_nav_view_model.dart';
+
+class CustomBottomNavBar extends ConsumerWidget {
   const CustomBottomNavBar({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final navProvider = context.watch<BottomNavProvider>();
+  Widget build(BuildContext context, WidgetRef ref) {
+    final currentPage = ref.watch(bottomNavProvider);
 
     final items = [
       _NavItem(icon: TablerIcons.home, label: "Home"),
@@ -42,10 +43,11 @@ class CustomBottomNavBar extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: List.generate(items.length, (index) {
-            final isSelected = navProvider.currentIndex == index;
+            final isSelected = currentPage == index;
             return Expanded(
               child: GestureDetector(
-                onTap: () => context.read<BottomNavProvider>().setIndex(index),
+                onTap: () =>
+                    ref.read(bottomNavProvider.notifier).setIndex(index),
                 behavior: HitTestBehavior.opaque,
                 child: AnimatedContainer(
                   duration: const Duration(milliseconds: 250),
