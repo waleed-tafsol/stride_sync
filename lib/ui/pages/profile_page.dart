@@ -44,8 +44,11 @@ class ProfilePage extends StatelessWidget {
                           height: 128.h,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            border: Border.all(color: AppColors.white, width: 4.w),
-                            image:  DecorationImage(
+                            border: Border.all(
+                              color: AppColors.white,
+                              width: 4.w,
+                            ),
+                            image: DecorationImage(
                               image: AssetImage(DummyAssets.profile),
                               fit: BoxFit.cover,
                             ),
@@ -66,7 +69,10 @@ class ProfilePage extends StatelessWidget {
                             decoration: BoxDecoration(
                               color: AppColors.secondary,
                               shape: BoxShape.circle,
-                              border: Border.all(color: AppColors.white, width: 2.w),
+                              border: Border.all(
+                                color: AppColors.white,
+                                width: 2.w,
+                              ),
                             ),
                             child: Icon(
                               Icons.check_circle,
@@ -88,9 +94,7 @@ class ProfilePage extends StatelessWidget {
                     SizedBox(height: 8.h),
                     Text(
                       'alex.miller@equitrackpro.com',
-                      style: AppFonts.black14w400.copyWith(
-                        letterSpacing: -0.4,
-                      ),
+                      style: AppFonts.black15w400,
                     ),
                   ],
                 ),
@@ -114,7 +118,10 @@ class ProfilePage extends StatelessWidget {
                           decoration: BoxDecoration(
                             gradient: AppColors.buttonGradient,
                             borderRadius: BorderRadius.circular(15.r),
-                            border: Border.all(color: AppColors.buttonBorder, width: 1.25.w),
+                            border: Border.all(
+                              color: AppColors.buttonBorder,
+                              width: 1.25.w,
+                            ),
                           ),
                           child: Icon(
                             Icons.stars,
@@ -129,7 +136,9 @@ class ProfilePage extends StatelessWidget {
                             children: [
                               Text(
                                 'Current Subscription',
-                                style: AppFonts.brown14w400.copyWith(letterSpacing: -0.4),
+                                style: AppFonts.brown14w400.copyWith(
+                                  letterSpacing: -0.4,
+                                ),
                               ),
                               Text(
                                 'Pro Plan - Active',
@@ -143,12 +152,12 @@ class ProfilePage extends StatelessWidget {
                         ),
                         Icon(
                           Icons.arrow_forward_ios,
-                          size: 16.sp,
-                          color: AppColors.textGrey,
+                          size: 20.sp,
+                          color: AppColors.secondary,
                         ),
                       ],
                     ),
-                    SizedBox(height: 16.h),
+                    SizedBox(height: 26.h),
                     Row(
                       children: [
                         Expanded(
@@ -166,12 +175,17 @@ class ProfilePage extends StatelessWidget {
                               decoration: BoxDecoration(
                                 color: AppColors.black,
                                 borderRadius: BorderRadius.circular(50.r),
-                                border: Border.all(color: AppColors.buttonBorder, width: 1.w),
+                                border: Border.all(
+                                  color: AppColors.buttonBorder,
+                                  width: 1.w,
+                                ),
                               ),
                               child: Center(
                                 child: Text(
                                   'Payment History',
-                                  style: AppFonts.white16w500.copyWith(letterSpacing: -0.8),
+                                  style: AppFonts.white16w500.copyWith(
+                                    letterSpacing: -0.8,
+                                  ),
                                 ),
                               ),
                             ),
@@ -196,7 +210,8 @@ class ProfilePage extends StatelessWidget {
                     _buildSettingTile(
                       icon: TablerIcons.userCircle,
                       title: 'Edit Profile',
-                      onTap: ()=>Navigator.pushNamed(context, EditProfile.routeName)
+                      onTap: () =>
+                          Navigator.pushNamed(context, EditProfile.routeName),
                     ),
                     SizedBox(height: 12.h),
                     _buildSettingTile(
@@ -275,8 +290,8 @@ class ProfilePage extends StatelessWidget {
             trailing ??
                 Icon(
                   Icons.arrow_forward_ios,
-                  size: 16.sp,
-                  color: AppColors.textGrey,
+                  size: 20.sp,
+                  color: AppColors.secondary,
                 ),
           ],
         ),

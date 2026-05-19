@@ -98,72 +98,107 @@ class HomePage extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Row(
-            children: [
-              Expanded(
-                child: Container(
-                  padding: EdgeInsets.all(16.w),
+          Container(
+            padding: EdgeInsets.all(16.w),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12.r),
+              color: AppColors.fillColor,
+            ),
+            child: Row(
+              crossAxisAlignment: .start,
+              children: [
+                Container(
+                  padding: EdgeInsets.all(14.w),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12.r),
-                    color: AppColors.fillColor,
+                    shape: BoxShape.circle,
+                    border: Border.all(color: AppColors.secondary),
+                    color: AppColors.lightBrown,
                   ),
-                  child: Column(
-                    crossAxisAlignment: .start,
-                    children: [
-                      Container(
-                        padding: EdgeInsets.all(14.w),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(color: AppColors.secondary),
-                          color: AppColors.lightBrown,
-                        ),
-                        child: Icon(
-                          TablerIcons.horseToy,
-                          size: 20.sp,
-                          color: AppColors.secondary,
-                        ),
-                      ),
-                      SizedBox(height: 16.h),
-                      Text("Total Horses", style: AppFonts.black16w400),
-                      Text("12", style: AppFonts.brown20w500),
-                    ],
+                  child: Icon(
+                    TablerIcons.horseToy,
+                    size: 20.sp,
+                    color: AppColors.secondary,
                   ),
                 ),
-              ),
-              SizedBox(width: 12.w),
-              Expanded(
-                child: Container(
-                  padding: EdgeInsets.all(16.w),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12.r),
-                    color: AppColors.fillColor,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: .start,
-                    children: [
-                      Container(
-                        padding: EdgeInsets.all(14.w),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(color: AppColors.secondary),
-                          color: AppColors.lightBrown,
-                        ),
-                        child: Icon(
-                          TablerIcons.horseToy,
-                          size: 20.sp,
-                          color: AppColors.secondary,
-                        ),
-                      ),
-                      SizedBox(height: 16.h),
-                      Text("Subscription", style: AppFonts.black16w400),
-                      Text("Personal Pro", style: AppFonts.brown20w500),
-                    ],
-                  ),
+                SizedBox(width: 16.h),
+                Column(
+                  crossAxisAlignment: .start,
+                  children: [
+                    Text("Total Horses", style: AppFonts.black16w400),
+                    Text("12", style: AppFonts.brown20w500),
+                  ],
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-          SizedBox(height: 32.h),
+          SizedBox(height: 20.h),
+
+          // Row(
+          //   children: [
+          //     Expanded(
+          //       child: Container(
+          //         padding: EdgeInsets.all(16.w),
+          //         decoration: BoxDecoration(
+          //           borderRadius: BorderRadius.circular(12.r),
+          //           color: AppColors.fillColor,
+          //         ),
+          //         child: Column(
+          //           crossAxisAlignment: .start,
+          //           children: [
+          //             Container(
+          //               padding: EdgeInsets.all(14.w),
+          //               decoration: BoxDecoration(
+          //                 shape: BoxShape.circle,
+          //                 border: Border.all(color: AppColors.secondary),
+          //                 color: AppColors.lightBrown,
+          //               ),
+          //               child: Icon(
+          //                 TablerIcons.horseToy,
+          //                 size: 20.sp,
+          //                 color: AppColors.secondary,
+          //               ),
+          //             ),
+          //             SizedBox(height: 16.h),
+          //             Text("Total Horses", style: AppFonts.black16w400),
+          //             Text("12", style: AppFonts.brown20w500),
+          //           ],
+          //         ),
+          //       ),
+          //     ),
+          //     SizedBox(width: 12.w),
+          //     Expanded(
+          //       child: Container(
+          //         padding: EdgeInsets.all(16.w),
+          //         decoration: BoxDecoration(
+          //           borderRadius: BorderRadius.circular(12.r),
+          //           color: AppColors.fillColor,
+          //         ),
+          //         child: Column(
+          //           crossAxisAlignment: .start,
+          //           children: [
+          //             Container(
+          //               padding: EdgeInsets.all(14.w),
+          //               decoration: BoxDecoration(
+          //                 shape: BoxShape.circle,
+          //                 border: Border.all(color: AppColors.secondary),
+          //                 color: AppColors.lightBrown,
+          //               ),
+          //               child: Icon(
+          //                 TablerIcons.horseToy,
+          //                 size: 20.sp,
+          //                 color: AppColors.secondary,
+          //               ),
+          //             ),
+          //             SizedBox(height: 16.h),
+          //             Text("Subscription", style: AppFonts.black16w400),
+          //             Text("Personal Pro", style: AppFonts.brown20w500),
+          //           ],
+          //         ),
+          //       ),
+          //     ),
+          //   ],
+          // ),
+          // SizedBox(height: 32.h),
           Row(
             children: [
               Expanded(

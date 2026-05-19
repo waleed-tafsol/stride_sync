@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stride_sync/constant/assets.dart';
 import 'package:stride_sync/models/dummy%20model/plan_model.dart';
+import 'package:stride_sync/ui/pages/bottom_nav_page.dart';
 import 'package:stride_sync/ui/resources/app_colors.dart';
 import 'package:stride_sync/ui/resources/app_fonts.dart';
 import 'package:stride_sync/ui/widgets/custom_app_bar.dart';
@@ -272,7 +273,16 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
                 ),
 
                 SizedBox(height: 91.h),
-                GradientButton(text: planModel.buttonText, onPressed: () {}),
+                GradientButton(
+                  text: planModel.buttonText,
+                  onPressed: () {
+                    Navigator.pushNamedAndRemoveUntil(
+                      context,
+                      BottomNavPage.routeName,
+                      (route) => false,
+                    );
+                  },
+                ),
                 SizedBox(height: 35.h),
               ],
             ),
